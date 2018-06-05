@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_6"
+    android:layout_marginLeft="@dimen/space_8"
+    android:layout_marginRight="@dimen/space_8"
+    android:layout_marginTop="@dimen/space_6"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="1dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/space_8">
+
+        <ImageView
+            android:id="@+id/iv_picture"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:background="@color/windowBackground"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_gifts_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_12"
+            android:layout_marginTop="@dimen/space_8"
+            android:layout_toEndOf="@+id/iv_picture"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="【爱的表达】粉红玫瑰鲜花"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18" />
+
+        <TextView
+            android:id="@+id/tv_gifts_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_gifts_name"
+            android:layout_below="@+id/tv_gifts_name"
+            android:layout_marginTop="@dimen/space_8"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="献给你一份纯洁的爱"
+            android:textColor="@color/textColor2"
+            android:textSize="@dimen/text_size_14" />
+
+        <View
+            android:id="@+id/view_dividing"
+            android:layout_width="match_parent"
+            android:layout_height="0.4dp"
+            android:layout_below="@+id/iv_picture"
+            android:layout_marginTop="@dimen/space_8"
+            android:background="@color/gray" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_dividing"
+            android:layout_marginTop="@dimen/space_8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_gifts_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥0.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0.4dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="@dimen/space_8"
+                android:background="@color/gray" />
+
+            <ImageView
+                android:id="@+id/iv_add_shopping_cart"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="@dimen/space_8"
+                android:padding="@dimen/space_4"
+                android:src="@drawable/ic_shopping_cart_2" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_wechat_gift_giving"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_gradual_change_orange"
+                android:text="微信送礼"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12" />
+
+            <Button
+                android:id="@+id/btn_direct_purchasing"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_gradual_change_black"
+                android:text="送给自己"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

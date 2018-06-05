@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">送哪儿</string>
+
+    <string name="main_tab_name_home">首页</string>
+    <string name="main_tab_name_classify">分类</string>
+    <string name="main_tab_name_shopping_cart">购物车</string>
+    <string name="main_tab_name_personal_center">个人中心</string>
+</resources>

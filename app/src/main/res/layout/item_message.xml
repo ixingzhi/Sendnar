@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_12">
+
+        <ImageView
+            android:id="@+id/iv_message_remind"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_message_remind" />
+
+        <TextView
+            android:id="@+id/tv_message_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_12"
+            android:layout_toEndOf="@+id/iv_message_remind"
+            android:layout_toStartOf="@+id/tv_time"
+            android:text="标题"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/space_12"
+            android:text="05-25 11:59"
+            android:textColor="@color/textColor2" />
+
+        <TextView
+            android:id="@+id/tv_message_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:layout_alignStart="@+id/tv_message_title"
+            android:layout_below="@+id/tv_message_title"
+            android:layout_marginTop="@dimen/space_8"
+            android:layout_toStartOf="@+id/iv_open_status"
+            android:text="消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容消息内容"
+            android:textColor="@color/textColor1" />
+
+        <ImageView
+            android:id="@+id/iv_open_status"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+            android:layout_alignTop="@+id/tv_message_content"
+            android:src="@drawable/ic_arrows_down_gray" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginLeft="72dp"
+        android:background="@color/gray" />
+
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_prompt"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"></LinearLayout>
+
+    <View
+        android:layout_width="260dp"
+        android:layout_height="1dp"
+        android:background="@color/windowBackground" />
+
+    <TextView
+        android:id="@+id/tv_i_know"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_i_know_click_color"
+        android:gravity="center"
+        android:text="我知道了"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_16" />
+
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/space_20"
+    android:paddingTop="@dimen/space_20">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="排行金额计算"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_16"
+        android:text="本月金额计算起止时间"
+        android:textColor="@color/textColor2" />
+
+    <TextView
+        android:id="@+id/tv_this_month_amount_start_stop_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018.05.21-2018.05.21"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_12"
+        android:text="累计金额计算起止时间"
+        android:textColor="@color/textColor2" />
+
+    <TextView
+        android:id="@+id/tv_accumulative_total_amount_start_stop_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018.05.21-2018.05.21"
+        android:textColor="@color/black" />
+
+
+</LinearLayout>

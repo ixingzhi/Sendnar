@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+        <com.shichuang.sendnar.widget.RxTitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tb_title="选择服务类型">
+
+        </com.shichuang.sendnar.widget.RxTitleBar>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_refund"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_click_color"
+            android:padding="@dimen/space_12">
+
+            <TextView
+                android:id="@+id/tv_refund_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="仅退款"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_refund_title"
+                android:layout_marginTop="@dimen/space_8"
+                android:text="未收到货（包含未签收），或客户协商同意前提下"
+                android:textColor="@color/textColor2" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrows_right_gray" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_marginLeft="@dimen/space_12"
+            android:background="@color/gray" />
+
+        <RelativeLayout
+            android:id="@+id/rl_refund_and_return_goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_click_color"
+            android:padding="@dimen/space_12">
+
+            <TextView
+                android:id="@+id/tv_refund_and_return_goods_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退货退款"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_refund_and_return_goods_title"
+                android:layout_marginTop="@dimen/space_8"
+                android:text="已收到货，需要退换已收到的货物"
+                android:textColor="@color/textColor2" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrows_right_gray" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_marginLeft="@dimen/space_12"
+            android:background="@color/gray" />
+
+        <RelativeLayout
+            android:id="@+id/rl_exchange_goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_click_color"
+            android:padding="@dimen/space_12">
+
+            <TextView
+                android:id="@+id/tv_exchange_goods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="换货"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_exchange_goods"
+                android:layout_marginTop="@dimen/space_8"
+                android:text="已收到货，需要更换已收到的货物"
+                android:textColor="@color/textColor2" />
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrows_right_gray" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

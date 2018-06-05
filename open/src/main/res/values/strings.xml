@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Open</string>
+    <string name="empty_view_loading_data">加载中...</string>
+    <string name="empty_view_network_error">内容加载失败\n点击重新加载</string>
+    <string name="empty_view_network_error_click_to_refresh">没有可用的网络</string>
+    <string name="empty_view_empty_data">暂无内容</string>
+</resources>

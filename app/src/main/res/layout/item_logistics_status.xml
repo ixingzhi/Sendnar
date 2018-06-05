@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:paddingLeft="@dimen/space_24"
+    android:paddingRight="@dimen/space_24">
+
+    <LinearLayout
+        android:id="@+id/ll_sign"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_up"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/gray" />
+
+        <View
+            android:id="@+id/view_point"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/bg_logistics_point_current" />
+
+        <View
+            android:id="@+id/view_down"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:background="@color/gray" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_logistics_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginTop="@dimen/space_12"
+        android:layout_toEndOf="@+id/ll_sign"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="XXX 的派件已经签收，签收人是拍照签收" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tv_logistics_info"
+        android:layout_below="@+id/tv_logistics_info"
+        android:layout_marginTop="@dimen/space_8"
+        android:text="2018-04-23 11:06" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tv_time"
+        android:background="@color/gray" />
+
+</RelativeLayout>

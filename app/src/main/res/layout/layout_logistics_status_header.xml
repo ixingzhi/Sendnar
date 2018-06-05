@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_24">
+
+        <ImageView
+            android:id="@+id/iv_logistics_company_logo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:background="@color/windowBackground" />
+
+        <TextView
+            android:id="@+id/tv_logistics_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_24"
+            android:layout_toEndOf="@+id/iv_logistics_company_logo"
+            android:text="物流订单："
+            android:textColor="@color/textColor1" />
+
+        <TextView
+            android:id="@+id/tv_logistics_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_logistics_order"
+            android:layout_marginLeft="@dimen/space_24"
+            android:layout_marginTop="@dimen/space_12"
+            android:layout_toEndOf="@+id/iv_logistics_company_logo"
+            android:text="物流公司："
+            android:textColor="@color/textColor1" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/windowBackground" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_12"
+        android:text="物流信息："
+        android:textColor="@color/textColor1" />
+
+</LinearLayout>

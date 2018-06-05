@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/space_12">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发票抬头"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_18" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_12"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_personage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_personage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_invoice_looked_up" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space_12"
+                        android:text="个人"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space_35"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_company"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_invoice_looked_up" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space_12"
+                        android:text="单位"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_company_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_company_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/space_8"
+                    android:background="@drawable/bg_invoice_company_name"
+                    android:hint="请填写单位名称"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/space_12"
+                    android:paddingRight="@dimen/space_12"
+                    android:textSize="@dimen/text_size_15" />
+
+                <EditText
+                    android:id="@+id/et_company_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/space_8"
+                    android:background="@drawable/bg_invoice_company_name"
+                    android:hint="请在次填写纳税人识别号"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/space_12"
+                    android:paddingRight="@dimen/space_12"
+                    android:textSize="@dimen/text_size_15" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/space_12">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收票人信息"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_18" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/space_12"
+                android:background="@color/windowBackground" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="* 收票人手机"
+                    android:textColor="@color/textColor2" />
+
+                <EditText
+                    android:id="@+id/et_receive_man_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/space_12"
+                    android:paddingRight="@dimen/space_12"
+                    android:textSize="@dimen/text_size_15" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/windowBackground" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="* 收票人邮箱"
+                    android:textColor="@color/textColor2" />
+
+                <EditText
+                    android:id="@+id/et_receive_man_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="用来接收电子发票邮箱，可选填"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/space_12"
+                    android:paddingRight="@dimen/space_12"
+                    android:textSize="@dimen/text_size_15" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/windowBackground" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_12"
+            android:background="@color/white"
+            android:padding="@dimen/space_12">
+
+            <TextView
+                android:id="@+id/tv_invoice_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发票内容"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_18" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_12"
+                android:layout_toEndOf="@+id/tv_invoice_content"
+                android:text="发票内容选项已根据税法调整，请具体已展示为准"
+                android:textColor="@color/textColor2" />
+
+            <Button
+                android:id="@+id/btn_goods_details"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_below="@+id/tv_invoice_content"
+                android:layout_marginTop="@dimen/space_12"
+                android:background="@drawable/bg_btn_invoice"
+                android:text="商品明细"
+                android:textColor="@drawable/invoice_type_txt" />
+
+            <Button
+                android:id="@+id/btn_goods_category"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignBottom="@+id/btn_goods_details"
+                android:layout_marginLeft="@dimen/space_12"
+                android:layout_toEndOf="@+id/btn_goods_details"
+                android:background="@drawable/bg_btn_invoice"
+                android:text="商品类别"
+                android:textColor="@drawable/invoice_type_txt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_goods_details"
+                android:layout_marginTop="@dimen/space_12"
+                android:text="发票内容将显示详细商品名称与价格信息"
+                android:textColor="@color/textColor2" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/space_16"
+            android:layout_marginRight="@dimen/space_16"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/ic_btn_gradual_change_orange"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16" />
+
+    </LinearLayout>
+</ScrollView>
+

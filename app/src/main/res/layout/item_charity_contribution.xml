@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginBottom="2dp"
+    android:orientation="vertical">
+
+    <com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout
+        android:id="@+id/swipe_menu_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentView="@+id/content"
+        app:rightMenuView="@+id/right">
+
+        <RelativeLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_12">
+
+            <TextView
+                android:id="@+id/tv_serial_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/space_12"
+                android:layout_toEndOf="@+id/tv_serial_number"
+                android:src="@drawable/ic_avatar_default" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/space_12"
+                android:layout_toEndOf="@+id/iv_avatar"
+                android:text="用户名"
+                android:maxLength="8"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16" />
+
+            <TextView
+                android:id="@+id/tv_this_month_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="本月：¥0.00"
+                android:textColor="@color/textColor2" />
+
+            <TextView
+                android:id="@+id/tv_aggregate_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tv_this_month_amount"
+                android:layout_below="@+id/tv_this_month_amount"
+                android:layout_marginTop="@dimen/space_2"
+                android:text="累计：¥0.00"
+                android:textColor="@color/textColor2" />
+
+        </RelativeLayout>
+        
+        <Button
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="设为合伙人"
+            android:background="@color/redOrange"
+            android:textColor="@color/white"/>
+    </com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout>
+
+</LinearLayout>

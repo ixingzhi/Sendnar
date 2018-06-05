@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+repositories {
+    flatDir {
+        dirs project(':UdeskSDKUI').file('libs')
+    }
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.compileSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        //ndk { abiFilters "armeabi", "armeabi-v7a" }
+    }
+
+    signingConfigs {
+        appkey {
+            keyAlias 'Sendnar'
+            keyPassword '123456'
+            storeFile file('../Sendnar.jks')
+            storePassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+            signingConfig signingConfigs.appkey
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.appkey
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    //noinspection GradleCompatible
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    // 65536
+    compile 'com.android.support:multidex:1.0.1'
+    //noinspection GradleCompatible
+    compile "com.android.support:support-v4:$rootProject.ext.supportVersion"
+    //noinspection GradleCompatible
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    //noinspection GradleDependency
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
+    compile "com.android.support:cardview-v7:$rootProject.ext.supportVersion"
+    implementation project(':open')
+    implementation project(':UdeskSDKUI')
+    // banner
+    compile 'com.youth.banner:banner:1.4.10'
+    // 圆形图片
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    // BaseRecyclerViewAdapter
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'me.drakeet.multitype:multitype:3.3.1'
+    // 图片选择
+    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
+    // 图片浏览
+    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
+    // 侧滑菜单
+    compile 'com.github.anzaizai:EasySwipeMenuLayout:1.1.2'
+    // 图片选择
+    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
+    // 时间选择
+    compile 'com.contrarywind:Android-PickerView:4.1.3'
+    // 内存泄露检测
+    //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
+    //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
+}

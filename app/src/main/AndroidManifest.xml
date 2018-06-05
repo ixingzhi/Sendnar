@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.shichuang.sendnar">
+
+    <!-- 该权限group,用于访问网络，或者基于网络的lbs定位服务,以及微信,微博,QQ分享和登陆功能，判断或改变网络状态等功能 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 读取外部存储权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 允许程序获得设备信息 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <permission
+        android:name="com.shichuang.sendnar.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <!-- Required  一些系统要求的权限，如访问网络等-->
+    <uses-permission android:name="com.shichuang.sendnar.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <application
+        android:name=".SendnarApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_logo"
+        android:supportsRtl="true"
+        android:theme="@style/BaseTheme">
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PovertyAlleviationActivitiesActivity"
+            android:label="扶贫活动"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PovertyAlleviationActivitiesDetailsActivity"
+            android:label="扶贫活动详情"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GiftsCategoryActivity"
+            android:label="礼品"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GiftsDetailsActivity"
+            android:label="礼物详情"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ConfirmOrderActivity"
+            android:label="确认订单"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyAddressActivity"
+            android:label="我的地址"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FillInTheInvoiceInformationActivity"
+            android:label="填写发票信息"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OrderSettlementActivity"
+            android:label="订单结算"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PayResultActivity"
+            android:label="支付成功"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AddAddressActivity"
+            android:label="新建地址"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FestivalActivity"
+            android:label="节日"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PastActivitiesActivity"
+            android:label="往期活动"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="登录"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:label="注册"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BindPhoneNumberActivity"
+            android:label="绑定手机号"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ForgotPasswordActivity"
+            android:label="忘记密码"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:label="设置"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChangeAvatarActivity"
+            android:label="更换头像"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FeedbackActivity"
+            android:label="意见反馈"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyOrderActivity"
+            android:label="我的订单"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OrderDetailsActivity"
+            android:label="订单详情"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LogisticsStatusActivity"
+            android:label="物流状态"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CharityContributionActivity"
+            android:label="慈善贡献度"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyTeamActivity"
+            android:label="我的团队"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BusinessCooperationActivity"
+            android:label="商务合作"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HonoraryContributionActivity"
+            android:label="荣誉贡献"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HonorGuideActivity"
+            android:label="勋章指南"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyItemsActivity"
+            android:label="我的物品"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GreetingsActivity"
+            android:label="祝福语"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GiftGivingActivity"
+            android:label="送出的礼物"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GiftReceivedActivity"
+            android:label="收到的礼物"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyIntegralActivity"
+            android:label="我的积分"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyIntegralTheme" />
+        <activity
+            android:name=".activity.IntegralGuideActivity"
+            android:label="积分指南"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SearchResultActivity"
+            android:label="搜索结果"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.IncomeAmountActivity"
+            android:label="收益金额"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CommissionWithdrawalActivity"
+            android:label="佣金提现"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WithdrawalSuccessActivity"
+            android:label="提现成功"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WithdrawalRecordActivity"
+            android:label="提现记录"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.IntegralSubsidiaryActivity"
+            android:label="积分明细"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GiftReceivedConfirmOrderActivity"
+            android:label="礼物接收提交订单"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PersonalDataActivity"
+            android:label="个人资料"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.shichuang.open.base.WebPageActivity"
+            android:label="WebPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SinglePageActivity"
+            android:label="SinglePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TestActivity"
+            android:label="SinglePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MessageActivity"
+            android:label="消息"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChooseServiceTypeActivity"
+            android:label="选择服务类型"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ApplyExchangeGoodsActivity"
+            android:label="申请换货"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity
+            android:name=".activity.FillInTheLogisticsActivity"
+            android:label="填写物流"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.GoodsAfterAuditActivity"
+            android:label="售后审核"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LogoutDialogActivity"
+            android:label="账号冲突退出登录"
+            android:screenOrientation="portrait"
+            android:theme="@style/LogoutDialog" />
+
+        <!--************************************ 友盟分享集成开始 ************************************ -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5ae2c07ff29d9816c100007a"></meta-data>
+
+        <activity
+            android:name="com.shichuang.sendnar.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105543666" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- ************************************ 友盟分享集成结束 ************************************ -->
+
+        <!-- ***********************************极光推送配置开始***********************************-->
+
+        <!-- Rich push 核心功能 since 2.0.6-->
+        <activity
+            android:name="cn.jpush.android.ui.PopWinActivity"
+            android:exported="false"
+            android:theme="@style/MyDialogStyle"></activity>
+
+        <!-- Required SDK核心功能-->
+        <activity
+            android:name="cn.jpush.android.ui.PushActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="false"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.shichuang.sendnar" />
+            </intent-filter>
+        </activity>
+
+        <!-- Required SDK 核心功能-->
+        <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <service
+            android:name="cn.jpush.android.service.PushService"
+            android:exported="false"
+            android:process=":mult">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
+            </intent-filter>
+        </service>
+        <!-- since 3.0.9 Required SDK 核心功能-->
+        <provider
+            android:name="cn.jpush.android.service.DataProvider"
+            android:authorities="com.shichuang.sendnar.DataProvider"
+            android:exported="false" />
+
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+        <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+                <category android:name="com.shichuang.sendnar" />
+            </intent-filter>
+
+        </service>
+        <!-- since 3.1.0 Required SDK 核心功能-->
+        <provider
+            android:name="cn.jpush.android.service.DownloadProvider"
+            android:authorities="com.shichuang.sendnar.DownloadProvider"
+            android:exported="true" />
+        <!-- Required SDK核心功能-->
+        <receiver
+            android:name="cn.jpush.android.service.PushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />   <!--Required  显示通知栏 -->
+                <category android:name="com.shichuang.sendnar" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Required SDK核心功能-->
+        <receiver
+            android:name="cn.jpush.android.service.AlarmReceiver"
+            android:exported="false" />
+
+        <!-- User defined.  For test only  用户自定义的广播接收器-->
+        <receiver
+            android:name="com.shichuang.sendnar.push.MyJpushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.shichuang.sendnar" />
+            </intent-filter>
+        </receiver>
+        <!-- User defined.  For test only  用户自定义接收消息器,3.0.7开始支持,目前新tag/alias接口设置结果会在该广播接收器对应的方法中回调-->
+        <receiver android:name="com.shichuang.sendnar.push.MyJPushMessageReceiver">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.shichuang.sendnar"></category>
+            </intent-filter>
+        </receiver>
+        <!-- Required  . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="1fb1adbc8b6f5cfe543bc80d" /> <!--  </>值来自开发者平台取得的AppKey-->
+
+        <!-- ***********************************极光推送配置结束***********************************-->
+
+
+        <!-- 微信支付 -->
+        <activity
+            android:name="com.shichuang.sendnar.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- 支付宝集成 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <!-- 退出登录receiver -->
+        <receiver android:name=".receiver.LogoutReceiver">
+            <intent-filter>
+                <action android:name="com.shichuang.sendnar.logout" />
+            </intent-filter>
+        </receiver>
+        <!-- 网络状态监听广播 -->
+        <receiver android:name=".receiver.NetworkConnectChangedReceiver">
+            <intent-filter>
+                <action android:name="android.NET.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.Net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>

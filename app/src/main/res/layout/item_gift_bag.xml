@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/space_6"
+    android:layout_marginLeft="@dimen/space_8"
+    android:layout_marginRight="@dimen/space_8"
+    android:layout_marginTop="@dimen/space_6"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_picture"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/windowBackground"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_dividing"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/space_8">
+
+            <TextView
+                android:id="@+id/tv_gifts_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="【送哪儿神秘礼袋】"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_gifts_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥0.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0.4dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="@dimen/space_8"
+                android:background="@color/gray" />
+
+            <Button
+                android:id="@+id/btn_wechat_gift_giving"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_gradual_change_orange"
+                android:text="微信送礼"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12" />
+
+            <Button
+                android:id="@+id/btn_direct_purchasing"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_gradual_change_black"
+                android:text="送给自己"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

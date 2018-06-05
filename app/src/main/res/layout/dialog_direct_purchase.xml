@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#00000000" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.shichuang.open.widget.RxSquareLayout
+            android:id="@+id/square_layout"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@dimen/space_24"
+            android:layout_marginTop="-20dp">
+
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@color/windowBackground" />
+        </com.shichuang.open.widget.RxSquareLayout>
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/space_8"
+            android:src="@drawable/ic_direct_purchase_dialog_close" />
+
+        <TextView
+            android:id="@+id/tv_gifts_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/square_layout"
+            android:layout_marginLeft="@dimen/space_16"
+            android:layout_toEndOf="@+id/square_layout"
+            android:text="¥0.00"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/space_24">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_16"
+            android:text="数量"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_subtract"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:background="@drawable/bg_add_subtract_number"
+                android:textSize="@dimen/text_size_16"
+                android:text="—" />
+
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_add_subtract_number"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_16"
+                android:textColor="@color/black"
+                android:text="1" />
+
+            <TextView
+                android:id="@+id/tv_plus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_add_subtract_number"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_16"
+                android:text="+" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_confirm_order"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/ic_gradual_change_orange"
+            android:text="确认订单"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#191919</color>
+    <color name="colorPrimaryDark">#191919</color>
+    <color name="colorAccent">#191919</color>
+    <color name="user_info_message_notice">#E35B5A</color>
+
+    <!--线条分割线-->
+    <color name="lineColor">#E0E0E0</color>
+    <!--背景颜色-->
+    <color name="windowBackground">#f2f2f2</color>
+
+    <!--字体颜色-->
+    <color name="textColor">#565656</color>
+    <color name="textColor1">#666666</color>
+    <color name="textColor2">#A5A3A5</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#CCCCCC</color>
+    <color name="red">#FF0000</color>
+    <color name="transparent">#00000000</color>
+    <color name="click">#33ffffff</color>
+    <color name="orange">#FF7800</color>
+    <color name="redOrange">#D75523</color>
+    <color name="golden">#B3A078</color>
+
+    <color name="green_11B57C">#11B57C</color>
+    <color name="black_333333">#333333</color>
+    <color name="line_DDDDDD">#DDDDDD</color>
+
+    <color name="color_f6">#f6f6f6</color>
+
+</resources>

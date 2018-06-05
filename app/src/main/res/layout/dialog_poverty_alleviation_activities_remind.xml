@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/space_35"
+        android:paddingRight="@dimen/space_35"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品发货："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="您购买的扶贫商品为扶贫众筹订单，将待众筹成功后统一开始发货；"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_35"
+            android:text="商品退换："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="扶贫项目相关的商品，均不接受换礼物和退货"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/space_12"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/iv_i_know"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我知道了"
+                android:gravity="center"
+                android:padding="@dimen/space_8"
+                android:background="@drawable/ic_i_know"
+                android:textColor="@color/white"/>
+
+
+            <ImageView
+                android:id="@+id/iv_no_longer_remind"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="@dimen/space_8"
+                android:layout_marginLeft="@dimen/space_24"
+                android:src="@drawable/ic_pay_method"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="不再提醒"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/space_8"
+            android:layout_marginBottom="@dimen/space_16"
+            android:src="@drawable/ic_point_arrow_down_right" />
+
+    </LinearLayout>
+
+</LinearLayout>

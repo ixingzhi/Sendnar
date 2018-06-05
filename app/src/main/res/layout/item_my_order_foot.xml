@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="right"
+    android:paddingLeft="@dimen/space_12"
+    android:paddingRight="@dimen/space_12"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_cancel_order"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginBottom="@dimen/space_6"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginTop="@dimen/space_6"
+        android:background="@drawable/bg_white_stroke_gray_radius_4dp"
+        android:text="取消订单"
+        android:textColor="@color/textColor1" />
+
+    <Button
+        android:id="@+id/btn_check_logistics"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginBottom="@dimen/space_6"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginTop="@dimen/space_6"
+        android:background="@drawable/bg_white_stroke_gray_radius_4dp"
+        android:text="查看物流"
+        android:textColor="@color/textColor1" />
+
+    <Button
+        android:id="@+id/btn_delete_order"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginBottom="@dimen/space_6"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginTop="@dimen/space_6"
+        android:background="@drawable/bg_white_stroke_gray_radius_4dp"
+        android:text="删除订单"
+        android:textColor="@color/textColor1" />
+
+    <Button
+        android:id="@+id/btn_confirm_goods"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginBottom="@dimen/space_6"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginTop="@dimen/space_6"
+        android:background="@drawable/bg_white_stroke_red_orange_radius_4dp"
+        android:text="确认收货"
+        android:textColor="@color/redOrange" />
+
+
+    <Button
+        android:id="@+id/btn_immediate_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginBottom="@dimen/space_6"
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginTop="@dimen/space_6"
+        android:background="@drawable/bg_white_stroke_red_orange_radius_4dp"
+        android:text="立即支付"
+        android:textColor="@color/redOrange" />
+
+</LinearLayout>
