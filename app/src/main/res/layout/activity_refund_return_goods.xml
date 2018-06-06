@@ -16,7 +16,7 @@
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tb_title="申请换货">
+            app:tb_title="申请退款">
 
         </com.shichuang.sendnar.widget.RxTitleBar>
     </android.support.v7.widget.Toolbar>
@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:id="@+id/ll_goods_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -50,7 +51,41 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="换货原因"
+                    android:text="货物状态"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space_12"
+                    android:layout_marginRight="@dimen/space_12"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:text="请选择" />
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/ic_arrows_right_gray" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_refund_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/space_12">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="退款原因"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -74,7 +109,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -83,7 +117,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="换货商品"
+                    android:text="退款金额"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -93,55 +127,18 @@
                     android:layout_marginRight="@dimen/space_12"
                     android:layout_weight="1"
                     android:ellipsize="end"
-                    android:gravity="right"
                     android:maxLines="1"
-                    android:text="请选择" />
-
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:src="@drawable/ic_arrows_right_gray"
-                    android:visibility="invisible"/>
+                    android:text="¥0.00"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="@dimen/space_12">
-
-                <TextView
-                    android:id="@+id/tv_delivery_address_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="收货地址"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_delivery_address_title"
-                    android:layout_marginRight="@dimen/space_16"
-                    android:layout_marginTop="@dimen/space_8"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="" />
-
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrows_right_gray" />
-
-            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_12"
-                android:text="换货说明"
+                android:text="退款说明"
                 android:textColor="@color/black" />
 
             <RelativeLayout
@@ -155,7 +152,7 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:gravity="top"
-                    android:hint="填写换货说明"
+                    android:hint="填写退款说明"
                     android:maxLength="100"
                     android:textSize="@dimen/text_size_15" />
 
@@ -197,6 +194,7 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/btn_commit"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@drawable/ic_gradual_change_orange"

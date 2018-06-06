@@ -10,22 +10,31 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.Request;
 import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.widget.CustomLinearLayoutManager;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.adapter.GridImageAdapter;
 import com.shichuang.sendnar.adapter.OrderDetailsAdapter;
+import com.shichuang.sendnar.common.Constants;
+import com.shichuang.sendnar.common.NewsCallback;
+import com.shichuang.sendnar.entify.AMBaseDto;
+import com.shichuang.sendnar.entify.MsgCode;
 import com.shichuang.sendnar.entify.OrderDetails;
 import com.shichuang.sendnar.widget.FullyGridLayoutManager;
+import com.shichuang.sendnar.widget.OptionDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/6/5.
+ * 退款退货
+ * Created by Administrator on 2018/6/6.
  */
 
-public class ApplyExchangeGoodsActivity extends BaseActivity {
+public class RefundReturnGoodsActivity extends BaseActivity implements View.OnClickListener {
     // 商品列表
     private RecyclerView mRecyclerView;
     private OrderDetailsAdapter mAdapter;
@@ -35,22 +44,24 @@ public class ApplyExchangeGoodsActivity extends BaseActivity {
 
     private int maxSelectNum = 3;
     private List<LocalMedia> selectList = new ArrayList<>();
-
     private OrderDetails.OrderDetailsGoodsListModel orderInfo;
+
     @Override
     public int getLayoutId() {
-        return R.layout.activity_apply_exchange_goods;
+        return R.layout.activity_refund_return_goods;
     }
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         orderInfo = (OrderDetails.OrderDetailsGoodsListModel) getIntent().getSerializableExtra("orderInfo");
+
         initRecyclerView();
         mRvUploadDocuments = view.findViewById(R.id.rv_upload_documents);
         mRvUploadDocuments.setLayoutManager(new FullyGridLayoutManager(mContext, 3, GridLayoutManager.VERTICAL, false));
         mAdUploadDocuments = new GridImageAdapter(mContext, listener);
         mRvUploadDocuments.setAdapter(mAdUploadDocuments);
     }
+
 
     private void initRecyclerView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -65,17 +76,66 @@ public class ApplyExchangeGoodsActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
+        // 货物状态
+        findViewById(R.id.ll_goods_status).setOnClickListener(this);
+        // 退款原因
+        findViewById(R.id.ll_refund_reason).setOnClickListener(this);
+        findViewById(R.id.btn_commit).setOnClickListener(this);
     }
 
     @Override
     public void initData() {
+        if (orderInfo != null) {
+            mAdapter.addData(orderInfo);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_goods_status:
+                List<OptionDialog.Option> list = new ArrayList<>();
+                list.add(new OptionDialog.Option(2, "未收到货"));
+                list.add(new OptionDialog.Option(1, "已收到货"));
+                OptionDialog mDialog = new OptionDialog(mContext);
+                mDialog.setTitle("货物状态");
+                mDialog.setData(list);
+                mDialog.setOnOptionClickListener(new OptionDialog.OnOptionClickListener() {
+                    @Override
+                    public void onClick(OptionDialog.Option option, int position) {
+                        showToast(option.getName());
+                    }
+                });
+                mDialog.show();
+                break;
+            case R.id.ll_refund_reason:
+                List<OptionDialog.Option> list2 = new ArrayList<>();
+                list2.add(new OptionDialog.Option("未收到货"));
+                list2.add(new OptionDialog.Option("已收到货"));
+                OptionDialog mDialog2 = new OptionDialog(mContext);
+                mDialog2.setTitle("退款原因");
+                mDialog2.setData(list2);
+                mDialog2.setOnOptionClickListener(new OptionDialog.OnOptionClickListener() {
+                    @Override
+                    public void onClick(OptionDialog.Option option, int position) {
+                        showToast(option.getName());
+                    }
+                });
+                mDialog2.show();
+                break;
+            case R.id.btn_commit:
+                commit();
+                break;
+            default:
+                break;
+        }
     }
 
     public GridImageAdapter.onAddPicClickListener listener = new GridImageAdapter.onAddPicClickListener() {
 
         @Override
         public void onAddPicClick() {
-            PictureSelector.create(ApplyExchangeGoodsActivity.this)
+            PictureSelector.create(RefundReturnGoodsActivity.this)
                     .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                     .maxSelectNum(maxSelectNum)// 最大图片选择数量
                     .minSelectNum(1)// 最小选择数量
@@ -90,7 +150,6 @@ public class ApplyExchangeGoodsActivity extends BaseActivity {
                     .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
         }
     };
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -111,4 +170,44 @@ public class ApplyExchangeGoodsActivity extends BaseActivity {
             }
         }
     }
+
+    private void getRufundReturnGoodsReason(){
+        OkGo.<AMBaseDto<MsgCode>>post(Constants.refundReturnGoodsReasonUrl)
+                .tag(mContext)
+                .params("operate_type", 1)  // 1-退款 2-退款退货 3-换货
+                .execute(new NewsCallback<AMBaseDto<MsgCode>>() {
+                    @Override
+                    public void onStart(Request<AMBaseDto<MsgCode>, ? extends Request> request) {
+                        super.onStart(request);
+                        showLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(final Response<AMBaseDto<MsgCode>> response) {
+                        dismissLoading();
+                        showToast(response.body().msg);
+                        if (response.body().code == 0) {
+                           
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<AMBaseDto<MsgCode>> response) {
+                        super.onError(response);
+                        dismissLoading();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                    }
+                });
+    }
+
+    private void commit() {
+
+
+    }
+
+
 }

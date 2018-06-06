@@ -2,6 +2,7 @@ package com.shichuang.sendnar.entify;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -71,7 +72,7 @@ public class OrderDetails {
         this.sendGiftType = sendGiftType;
     }
 
-    public static class OrderDetailsGoodsListModel {
+    public static class OrderDetailsGoodsListModel implements Serializable{
         @SerializedName("sort_name")
         private String sortName;
         @SerializedName("sale_price")

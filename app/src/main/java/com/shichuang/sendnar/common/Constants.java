@@ -168,4 +168,8 @@ public interface Constants {
     String getTaxRateUrl = MAIN_ENGINE + "/api/v1/commission/get_tax_rate";
     // 提现记录
     String withdrawalRecordUrl = MAIN_ENGINE + "/api/v1/commission/myWithdrawDetail";
+    // 填写物流单号
+    String fillInTheLogisticsUrl = MAIN_ENGINE + "/api/v1/goods_refund_transform/submit";
+    // 获取退货换货原因
+    String refundReturnGoodsReasonUrl = MAIN_ENGINE + "/api/v1/refund/refund_cause";
 }
