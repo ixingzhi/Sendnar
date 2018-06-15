@@ -34,16 +34,16 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
 
             <LinearLayout
                 android:id="@+id/ll_goods_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:focusable="true"
                 android:layout_marginTop="@dimen/space_8"
-                android:focusableInTouchMode="true"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="@dimen/space_12">
@@ -55,6 +55,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/tv_goods_status"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/space_12"
@@ -89,6 +90,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/tv_refund_reason"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/space_12"
@@ -121,6 +123,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/tv_refund_amount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/space_12"
@@ -148,8 +151,11 @@
                 android:padding="@dimen/space_12">
 
                 <EditText
+                    android:id="@+id/et_refund_instructions"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:background="@null"
                     android:gravity="top"
                     android:hint="填写退款说明"
@@ -157,11 +163,12 @@
                     android:textSize="@dimen/text_size_15" />
 
                 <TextView
+                    android:id="@+id/tv_refund_instructions_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:text="5/100" />
+                    android:text="0/100" />
 
             </RelativeLayout>
 

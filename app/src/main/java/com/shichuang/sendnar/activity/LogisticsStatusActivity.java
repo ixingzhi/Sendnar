@@ -43,7 +43,8 @@ public class LogisticsStatusActivity extends BaseActivity {
     private LogisticsStatusAdapter mAdapter;
     private RxEmptyLayout mEmptyLayout;
 
-    private String orderNo;
+    private String logisticsNo;
+    private String logisticsCompany;
 
     @Override
     public int getLayoutId() {
@@ -52,7 +53,8 @@ public class LogisticsStatusActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-        orderNo = getIntent().getStringExtra("orderNo");
+        logisticsNo = getIntent().getStringExtra("logisticsNo");
+        logisticsCompany = getIntent().getStringExtra("logisticsCompany");
         mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.layout_logistics_status_header, (ViewGroup) findViewById(android.R.id.content), false);
         mTvLogisticsOrder = mHeaderView.findViewById(R.id.tv_logistics_order);
         mTvLogisticsCompany = mHeaderView.findViewById(R.id.tv_logistics_company);
@@ -84,7 +86,8 @@ public class LogisticsStatusActivity extends BaseActivity {
     private void getLogisticsData() {
         OkGo.<AMBaseDto<String>>get(Constants.getLogisticsMsgUrl)
                 .tag(mContext)
-                .params("id", orderNo)
+                .params("express_no", logisticsNo)
+                .params("com", logisticsCompany)
                 .execute(new NewsCallback<AMBaseDto<String>>() {
                     @Override
                     public void onStart(Request<AMBaseDto<String>, ? extends Request> request) {

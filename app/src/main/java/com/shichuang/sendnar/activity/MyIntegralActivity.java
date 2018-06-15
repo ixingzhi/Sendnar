@@ -92,7 +92,7 @@ public class MyIntegralActivity extends BaseActivity {
                 SinglePage.getInstance().toPage(mContext,"积分指南",SinglePage.INTEGRAL_GUIDE,"");
             }
         });
-        mHeaderView.findViewById(R.id.tv_integral_subsidiary).setOnClickListener(new View.OnClickListener() {
+        mHeaderView.findViewById(R.id.ll_integral_subsidiary).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RxActivityTool.skipActivity(mContext, IntegralSubsidiaryActivity.class);

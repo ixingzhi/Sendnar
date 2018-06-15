@@ -11,7 +11,7 @@ import java.util.List;
 public class GiftsCategoryType2 {
 
     private GiftsList goodsList;
-    private List<PackageList> packageList;
+    private PackageList packageList;
     private List<PicList> picList;
 
     public GiftsList getGoodsList() {
@@ -22,11 +22,11 @@ public class GiftsCategoryType2 {
         this.goodsList = goodsList;
     }
 
-    public List<PackageList> getPackageList() {
+    public PackageList getPackageList() {
         return packageList;
     }
 
-    public void setPackageList(List<PackageList> packageList) {
+    public void setPackageList(PackageList packageList) {
         this.packageList = packageList;
     }
 
@@ -121,55 +121,86 @@ public class GiftsCategoryType2 {
     }
 
     public static class PackageList {
-        @SerializedName("gift_id")
-        private int giftId;
-        @SerializedName("action_id")
-        private int actionId;
-        @SerializedName("PIC")
-        private String pic;
-        @SerializedName("real_total_pric")
-        private String realTotalPrice;
-        @SerializedName("gift_pack_name")
-        private String giftPackName;
+        private List<PackageListModel> rows;
+        private int recordCount;
 
-        public int getGiftId() {
-            return giftId;
+        public List<PackageListModel> getRows() {
+            return rows;
         }
 
-        public void setGiftId(int giftId) {
-            this.giftId = giftId;
+        public void setRows(List<PackageListModel> rows) {
+            this.rows = rows;
         }
 
-        public int getActionId() {
-            return actionId;
+        public int getRecordCount() {
+            return recordCount;
         }
 
-        public void setActionId(int actionId) {
-            this.actionId = actionId;
+        public void setRecordCount(int recordCount) {
+            this.recordCount = recordCount;
         }
 
-        public String getPic() {
-            return pic;
-        }
+        public static class PackageListModel{
+            @SerializedName("gift_id")
+            private int giftId;
+            @SerializedName("action_id")
+            private int actionId;
+            @SerializedName("PIC")
+            private String pic;
+            @SerializedName("real_total_pric")
+            private String realTotalPrice;
+            @SerializedName("gift_pack_name")
+            private String giftPackName;
+            @SerializedName("goods_id")
+            private int goodsId;
 
-        public void setPic(String pic) {
-            this.pic = pic;
-        }
+            public int getGiftId() {
+                return giftId;
+            }
 
-        public String getRealTotalPrice() {
-            return realTotalPrice;
-        }
+            public void setGiftId(int giftId) {
+                this.giftId = giftId;
+            }
 
-        public void setRealTotalPrice(String realTotalPrice) {
-            this.realTotalPrice = realTotalPrice;
-        }
+            public int getActionId() {
+                return actionId;
+            }
 
-        public String getGiftPackName() {
-            return giftPackName;
-        }
+            public void setActionId(int actionId) {
+                this.actionId = actionId;
+            }
 
-        public void setGiftPackName(String giftPackName) {
-            this.giftPackName = giftPackName;
+            public String getPic() {
+                return pic;
+            }
+
+            public void setPic(String pic) {
+                this.pic = pic;
+            }
+
+            public String getRealTotalPrice() {
+                return realTotalPrice;
+            }
+
+            public void setRealTotalPrice(String realTotalPrice) {
+                this.realTotalPrice = realTotalPrice;
+            }
+
+            public String getGiftPackName() {
+                return giftPackName;
+            }
+
+            public void setGiftPackName(String giftPackName) {
+                this.giftPackName = giftPackName;
+            }
+
+            public int getGoodsId() {
+                return goodsId;
+            }
+
+            public void setGoodsId(int goodsId) {
+                this.goodsId = goodsId;
+            }
         }
     }
 
@@ -178,6 +209,12 @@ public class GiftsCategoryType2 {
         private int actionPicId;
         @SerializedName("PIC")
         private String pic;
+        @SerializedName("pic_value_type")
+        private String picValueType;
+        @SerializedName("pic_value_parameter")
+        private String picValueParameter;
+        @SerializedName("type_id")
+        private String typeId;
 
         public int getActionPicId() {
             return actionPicId;
@@ -193,6 +230,30 @@ public class GiftsCategoryType2 {
 
         public void setPic(String pic) {
             this.pic = pic;
+        }
+
+        public String getPicValueType() {
+            return picValueType;
+        }
+
+        public void setPicValueType(String picValueType) {
+            this.picValueType = picValueType;
+        }
+
+        public String getPicValueParameter() {
+            return picValueParameter;
+        }
+
+        public void setPicValueParameter(String picValueParameter) {
+            this.picValueParameter = picValueParameter;
+        }
+
+        public String getTypeId() {
+            return typeId;
+        }
+
+        public void setTypeId(String typeId) {
+            this.typeId = typeId;
         }
     }
 }

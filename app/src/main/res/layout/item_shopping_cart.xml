@@ -5,10 +5,10 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/space_6"
+    android:layout_marginBottom="@dimen/space_4"
     android:layout_marginLeft="@dimen/space_8"
     android:layout_marginRight="@dimen/space_8"
-    android:layout_marginTop="@dimen/space_6"
+    android:layout_marginTop="@dimen/space_4"
     android:foreground="?android:attr/selectableItemBackground"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="1dp">
@@ -31,7 +31,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/space_8"
+                android:padding="@dimen/space_10"
                 android:src="@drawable/ic_shopping_cart_switch" />
 
             <ImageView

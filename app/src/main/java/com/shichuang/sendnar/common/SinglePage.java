@@ -68,7 +68,7 @@ public class SinglePage {
                         ((BaseActivity) context).dismissLoading();
                         if (response.body().code == 0 && response.body().data != null) {
                             // 如果是公司简介，显示分享
-                            SinglePageActivity.newInstance(context, title, Constants.MAIN_ENGINE_PIC + response.body().data.getH5Url(), pageType == COMPANY_PROFILE, id);
+                            SinglePageActivity.newInstance (context, title, Constants.MAIN_ENGINE_PIC + response.body().data.getH5Url(), pageType == COMPANY_PROFILE, id);
                         }
                     }
 

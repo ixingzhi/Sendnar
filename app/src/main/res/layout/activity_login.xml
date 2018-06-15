@@ -37,23 +37,23 @@
                 android:background="@drawable/bg_login_input"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/space_12"
-                android:paddingRight="@dimen/space_12">
+                android:paddingLeft="@dimen/space_16"
+                android:paddingRight="@dimen/space_16">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/ic_login_username" />
 
                 <EditText
                     android:id="@+id/et_username"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/space_12"
+                    android:layout_marginLeft="@dimen/space_16"
                     android:background="@null"
+                    android:hint="手机号"
                     android:inputType="number"
                     android:maxLength="11"
-                    android:hint="手机号"
                     android:textSize="@dimen/text_size_15" />
 
             </LinearLayout>
@@ -65,23 +65,23 @@
                 android:background="@drawable/bg_login_input"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/space_12"
-                android:paddingRight="@dimen/space_12">
+                android:paddingLeft="@dimen/space_16"
+                android:paddingRight="@dimen/space_16">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/ic_login_password" />
 
                 <EditText
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/space_12"
+                    android:layout_marginLeft="@dimen/space_16"
                     android:background="@null"
                     android:hint="密码"
-                    android:maxLines="1"
                     android:inputType="textPassword"
+                    android:maxLines="1"
                     android:textSize="@dimen/text_size_15" />
 
             </LinearLayout>
@@ -107,7 +107,7 @@
             android:layout_marginTop="-24dp"
             android:background="@drawable/bg_btn_login"
             android:text="登录"
-            android:textColor="@color/white"
+            android:textColor="@color/redOrange"
             android:textSize="@dimen/text_size_16" />
 
         <Button
@@ -119,7 +119,8 @@
             android:background="@drawable/bg_btn_register"
             android:text="注册"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16" />
+            android:textSize="@dimen/text_size_16"
+            android:visibility="gone" />
 
         <Space
             android:layout_width="0dp"
@@ -132,7 +133,8 @@
             android:layout_marginLeft="@dimen/space_20"
             android:layout_marginRight="@dimen/space_20"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <View
                 android:layout_width="0dp"
@@ -155,16 +157,50 @@
                 android:background="@color/windowBackground" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_wechat_login"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <LinearLayout
+            android:id="@+id/ll_wechat_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/space_35"
-            android:layout_marginTop="@dimen/space_20"
-            android:src="@drawable/ic_login_wechat" />
+            android:gravity="center"
+            android:background="@drawable/bg_wechat_login"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_wechat_login"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginBottom="@dimen/space_20"
+                android:layout_marginTop="@dimen/space_20"
+                android:src="@drawable/ic_login_wechat" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/space_10"
+                android:paddingLeft="@dimen/space_12"
+                android:paddingRight="@dimen/space_12"
+                android:paddingTop="@dimen/space_10"
+                android:text="点击使用微信登录"
+                android:textColor="@color/textColor1"
+                android:background="@drawable/bg_wechat_login_text"
+                android:textSize="@dimen/text_size_12" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="@dimen/space_16"
+        android:src="@drawable/bg_click_arrows_left" />
 
 
 </FrameLayout>

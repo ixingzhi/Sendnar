@@ -14,16 +14,16 @@ import com.lzy.okgo.request.base.Request;
 import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.tool.RxActivityTool;
 import com.shichuang.open.tool.RxKeyboardTool;
-import com.shichuang.sendnar.entify.Address;
-import com.shichuang.sendnar.widget.address.CityInterface;
-import com.shichuang.sendnar.widget.address.SelectAddressDialog;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.common.Constants;
 import com.shichuang.sendnar.common.NewsCallback;
 import com.shichuang.sendnar.common.TokenCache;
 import com.shichuang.sendnar.entify.AMBaseDto;
+import com.shichuang.sendnar.entify.Address;
 import com.shichuang.sendnar.entify.Empty;
 import com.shichuang.sendnar.widget.RxTitleBar;
+import com.shichuang.sendnar.widget.address.CityInterface;
+import com.shichuang.sendnar.widget.address.SelectAddressDialog;
 
 /**
  * 新增收货地址，修改收货地址

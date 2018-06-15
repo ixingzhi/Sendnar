@@ -34,15 +34,16 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
 
             <LinearLayout
+                android:id="@+id/ll_exchange_goods_reason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:focusable="true"
                 android:layout_marginTop="@dimen/space_8"
-                android:focusableInTouchMode="true"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:padding="@dimen/space_12">
@@ -54,6 +55,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/tv_exchange_goods_reason"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/space_12"
@@ -87,6 +89,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/tv_goods_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/space_12"
@@ -101,11 +104,12 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:src="@drawable/ic_arrows_right_gray"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_delivery_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -119,6 +123,25 @@
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:id="@+id/tv_consignee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="11dp"
+                    android:layout_toEndOf="@+id/tv_delivery_address_title"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tv_details_address"
+                    android:layout_alignStart="@+id/tv_consignee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_delivery_address_title"
@@ -151,6 +174,7 @@
                 android:padding="@dimen/space_12">
 
                 <EditText
+                    android:id="@+id/et_exchange_goods_instructions"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
@@ -160,11 +184,12 @@
                     android:textSize="@dimen/text_size_15" />
 
                 <TextView
+                    android:id="@+id/tv_exchange_goods_instructions_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:text="5/100" />
+                    android:text="0/100" />
 
             </RelativeLayout>
 
@@ -197,6 +222,7 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/btn_commit"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@drawable/ic_gradual_change_orange"

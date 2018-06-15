@@ -39,6 +39,8 @@ public class MyItems {
         private String labels;
         @SerializedName("sale_price")
         private String salePrice;
+        @SerializedName("is_checked")
+        private int isChecked;  // 后台返回
         private boolean isSelect;
 
         public int getId() {
@@ -95,6 +97,14 @@ public class MyItems {
 
         public void setSelect(boolean select) {
             isSelect = select;
+        }
+
+        public int getIsChecked() {
+            return isChecked;
+        }
+
+        public void setIsChecked(int isChecked) {
+            this.isChecked = isChecked;
         }
     }
 

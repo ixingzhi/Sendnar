@@ -16,9 +16,14 @@
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tb_title="审核">
+            app:tb_title="审核结果">
 
         </com.shichuang.sendnar.widget.RxTitleBar>
     </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 
 </LinearLayout>

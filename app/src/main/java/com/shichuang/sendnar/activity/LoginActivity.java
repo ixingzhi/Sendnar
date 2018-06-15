@@ -5,7 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -42,6 +47,7 @@ import java.util.Map;
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private static final int REGISTER_SUCCESS = 0x11;
     private static final int BIND_PHONE_NUMBER = 0x12;
+    private ImageView mIvBack;
     private EditText mEtUsername;
     private EditText mEtPassword;
 
@@ -50,6 +56,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String nickname = "";
     private String avatar = "";
     private String phoneNumber = "";
+    private String password = "";
     private String code = "";
 
     @Override
@@ -60,16 +67,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
+        mIvBack = (ImageView) findViewById(R.id.iv_back);
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mIvBack.getLayoutParams();
+        params.setMargins(0, RxStatusBarTool.getStatusBarHeight(mContext), 0, 0);
+
         mEtUsername = (EditText) findViewById(R.id.et_username);
         mEtPassword = (EditText) findViewById(R.id.et_password);
     }
 
     @Override
     public void initEvent() {
-        findViewById(R.id.btn_register).setOnClickListener(this);
+        //findViewById(R.id.btn_register).setOnClickListener(this);
+        mIvBack.setOnClickListener(this);
         findViewById(R.id.tv_forgot_password).setOnClickListener(this);
         findViewById(R.id.btn_login).setOnClickListener(this);
-        findViewById(R.id.iv_wechat_login).setOnClickListener(this);
+        findViewById(R.id.ll_wechat_login).setOnClickListener(this);
     }
 
     @Override
@@ -79,8 +91,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_register:
-                RxActivityTool.skipActivityForResult(LoginActivity.this, RegisterActivity.class, REGISTER_SUCCESS);
+//            case R.id.btn_register:
+//                RxActivityTool.skipActivityForResult(LoginActivity.this, RegisterActivity.class, REGISTER_SUCCESS);
+//                break;
+            case R.id.iv_back:
+                RxActivityTool.finish(mContext);
                 break;
             case R.id.tv_forgot_password:
                 RxActivityTool.skipActivityForResult(LoginActivity.this, ForgotPasswordActivity.class, REGISTER_SUCCESS);
@@ -88,7 +103,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.btn_login:
                 checkInfo();
                 break;
-            case R.id.iv_wechat_login:
+            case R.id.ll_wechat_login:
                 wechatLogin();
                 break;
             default:
@@ -138,7 +153,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             // 设置Udesk客服信息
                             UdeskHelper.setUserInfo(mContext);
                             // 设置极光推送
-                            JpushUtils.setJpushAlias(mContext,token.getUserId()+"");
+                            JpushUtils.setJpushAlias(mContext, token.getUserId() + "");
                             RxActivityTool.finish(mContext);
                         }
                     }
@@ -164,6 +179,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             mEtUsername.setText(username);
         } else if (requestCode == BIND_PHONE_NUMBER && resultCode == RESULT_OK) {
             phoneNumber = data.getStringExtra("phoneNumber");
+            password = data.getStringExtra("password");
             code = data.getStringExtra("code");
             oauthLogin();
         }
@@ -285,6 +301,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 .params("oauth_unionid", uid)
                 .params("nickname", nickname)
                 .params("phoneNum", phoneNumber)
+                .params("pass_word", password)
+                .params("confirm_pass_word", password)
                 .params("head_portrait", avatar)
                 .params("code", code)
                 .execute(new NewsCallback<AMBaseDto<OauthLogin>>() {

@@ -140,7 +140,11 @@ public class NavClassifyFragment extends Fragment implements View.OnClickListene
                 }else{
                     mNav.isType(false);
                 }
-                mNav.init(typeList.get(i).getId(), typeList.get(i).getName(), typeList.get(i).getSkip() == 1 ? GiftsCategoryType1Fragment.class : GiftsCategoryType2Fragment.class);
+                if("节日".equals(typeList.get(i).getName())){
+                    mNav.init(typeList.get(i).getId(), typeList.get(i).getName(), typeList.get(i).getSkip() == 1 ? GiftsCategoryType1Fragment.class : GiftsCategoryType3Fragment.class);
+                }else{
+                    mNav.init(typeList.get(i).getId(), typeList.get(i).getName(), typeList.get(i).getSkip() == 1 ? GiftsCategoryType1Fragment.class : GiftsCategoryType2Fragment.class);
+                }
                 mNav.setOnClickListener(NavClassifyFragment.this);
                 mLlNavContainer.addView(mNav);
             }

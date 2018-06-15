@@ -80,6 +80,12 @@ public class OrderDetails {
         private String pic;
         @SerializedName("buy_count")
         private int buyCount;
+        @SerializedName("order_detail_id")
+        private int orderDetailId;
+        @SerializedName("refund_status")
+        private int refundStatus;
+        @SerializedName("need_return")
+        private int needReturn;
 
         public String getSortName() {
             return sortName;
@@ -112,6 +118,30 @@ public class OrderDetails {
         public void setBuyCount(int buyCount) {
             this.buyCount = buyCount;
         }
+
+        public int getOrderDetailId() {
+            return orderDetailId;
+        }
+
+        public void setOrderDetailId(int orderDetailId) {
+            this.orderDetailId = orderDetailId;
+        }
+
+        public int getRefundStatus() {
+            return refundStatus;
+        }
+
+        public void setRefundStatus(int refundStatus) {
+            this.refundStatus = refundStatus;
+        }
+
+        public int getNeedReturn() {
+            return needReturn;
+        }
+
+        public void setNeedReturn(int needReturn) {
+            this.needReturn = needReturn;
+        }
     }
 
     public static class OrderDetailsModel {
@@ -141,6 +171,8 @@ public class OrderDetails {
         private String sendOutTime;
         @SerializedName("closing_time")
         private String closingTime;
+        @SerializedName("express_no")
+        private String expressNo;
 
         public String getOrderNo() {
             return orderNo;
@@ -244,6 +276,14 @@ public class OrderDetails {
 
         public void setClosingTime(String closingTime) {
             this.closingTime = closingTime;
+        }
+
+        public String getExpressNo() {
+            return expressNo;
+        }
+
+        public void setExpressNo(String expressNo) {
+            this.expressNo = expressNo;
         }
     }
 

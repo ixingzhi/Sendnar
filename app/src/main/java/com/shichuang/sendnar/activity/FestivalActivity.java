@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.OkGo;
@@ -15,6 +17,7 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.tool.RxActivityTool;
+import com.shichuang.open.tool.RxScreenTool;
 import com.shichuang.open.widget.CustomLinearLayoutManager;
 import com.shichuang.open.widget.RxEmptyLayout;
 import com.shichuang.sendnar.R;
@@ -107,6 +110,11 @@ public class FestivalActivity extends BaseActivity {
 
             }
         });
+        // 设置比例尺寸 300 * 750
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBanner.getLayoutParams();
+        // 根据比例获取高度
+        int height = (int) ((float) 300 * RxScreenTool.getDisplayMetrics(mContext).widthPixels / 750);
+        params.height = height;
     }
 
     private void initGiftBagRecyclerView() {
@@ -298,7 +306,8 @@ public class FestivalActivity extends BaseActivity {
                                     }
                                 }
                             } else {
-                                mEmptyLayout.show(RxEmptyLayout.EMPTY_DATA);
+                                mEmptyLayout.hide();
+                                //mEmptyLayout.show(RxEmptyLayout.EMPTY_DATA);
                             }
                         } else {
                             showToast(response.body().msg);

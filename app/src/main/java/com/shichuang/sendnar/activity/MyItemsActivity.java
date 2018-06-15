@@ -6,12 +6,14 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.OkGo;
@@ -29,6 +31,7 @@ import com.shichuang.sendnar.adapter.MyItemsAdapter;
 import com.shichuang.sendnar.adapter.OrderInfoAdapter;
 import com.shichuang.sendnar.adapter.RecommendGiftsAdapter;
 import com.shichuang.sendnar.common.Constants;
+import com.shichuang.sendnar.common.GiftsDetailsType;
 import com.shichuang.sendnar.common.NewsCallback;
 import com.shichuang.sendnar.common.TokenCache;
 import com.shichuang.sendnar.common.UserCache;
@@ -39,6 +42,7 @@ import com.shichuang.sendnar.entify.FestivalList;
 import com.shichuang.sendnar.entify.GoodsList;
 import com.shichuang.sendnar.entify.MyItems;
 import com.shichuang.sendnar.entify.WxMakeOrder;
+import com.shichuang.sendnar.event.MessageEvent;
 import com.shichuang.sendnar.widget.GiftsDetailsRemindDialog;
 import com.shichuang.sendnar.widget.MyItemsRemindDialog;
 import com.shichuang.sendnar.widget.RxTitleBar;
@@ -47,6 +51,10 @@ import com.shichuang.sendnar.widget.payment.wechat.pay.WechatPayTools;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +70,7 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
     private static final int GET_RED_PACKET_ID = 0x11;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private LinearLayout mLlEmptyData;
-    private LinearLayout mLlHasData;
+    private RelativeLayout mRlHasData;
     private RecyclerView mRecyclerView;
     private MyItemsAdapter mAdapter;
     private RecyclerView mRecommendRecyclerView;
@@ -84,6 +92,8 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
     private String imgShareUrl = "";
     // 凑红包Id
     private int gatherTogetherRedPacketId;
+    // 订单编号，支付成功后传值
+    private String orderNo = "";
 
     @Override
     public int getLayoutId() {
@@ -92,12 +102,14 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
+        orderNo = getIntent().getStringExtra("orderNo");
         mLlEmptyData = view.findViewById(R.id.ll_empty_data);
-        mLlHasData = view.findViewById(R.id.ll_has_data);
+        mRlHasData = view.findViewById(R.id.rl_has_data);
         initRecommendRecyclerView();
         initRecyclerView();
         mIvCheckAll = (ImageView) findViewById(R.id.iv_check_all);
         isShowRemind();
+        EventBus.getDefault().register(mContext);
     }
 
     private void isShowRemind() {
@@ -166,6 +178,7 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
                 handleData();
             }
         });
+        findViewById(R.id.ll_to_send_me).setOnClickListener(this);
     }
 
     @Override
@@ -207,6 +220,25 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.btn_share_wechat_friends:
                 send(1);
+                break;
+            case R.id.ll_to_send_me:  // 送自己
+                if (sbSelectIds == null) {
+                    sbSelectIds = new StringBuffer();
+                } else {
+                    sbSelectIds.setLength(0);
+                }
+                for (MyItems.MyItemsModel model : mAdapter.getData()) {
+                    if (model.isSelect()) {
+                        sbSelectIds.append(model.getId() + ",");
+                    }
+                }
+                if (sbSelectIds.length() > 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("goodsIds", sbSelectIds.deleteCharAt(sbSelectIds.length() - 1).toString());
+                    RxActivityTool.skipActivity(mContext, MyItemsToSendMeConfirmOrderActivity.class, bundle);
+                } else {
+                    showToast("请选择商品");
+                }
                 break;
             default:
                 break;
@@ -260,6 +292,7 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
                 //.cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)  //缓存模式先使用缓存,然后使用网络数据
                 .tag(context)
                 .params("token", TokenCache.token(mContext))
+                .params("order_no", orderNo)
                 .params("pageSize", pageSize)
                 .params("pageIndex", pageIndex)
                 .execute(new NewsCallback<AMBaseDto<MyItems>>() {
@@ -313,12 +346,11 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void setData(List<MyItems.MyItemsModel> data) {
-        // 存在凑红包Id，设置为选中
-        if (gatherTogetherRedPacketId != 0) {
-            for (MyItems.MyItemsModel model : data) {
-                if (model.getId() == gatherTogetherRedPacketId) {
-                    model.setSelect(true);
-                }
+
+        // 存在凑红包Id，设置为选中, 或者  红包需要选择，则设置为选中
+        for (MyItems.MyItemsModel model : data) {
+            if (model.getId() == gatherTogetherRedPacketId || model.getIsChecked() == 1) {
+                model.setSelect(true);
             }
         }
         if (mSwipeRefreshLayout.isRefreshing()) {
@@ -328,10 +360,10 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
         }
         if (data.size() > 0) {
             mLlEmptyData.setVisibility(View.GONE);
-            mLlHasData.setVisibility(View.VISIBLE);
+            mRlHasData.setVisibility(View.VISIBLE);
         } else {
             mLlEmptyData.setVisibility(View.VISIBLE);
-            mLlHasData.setVisibility(View.GONE);
+            mRlHasData.setVisibility(View.GONE);
         }
         handleData();
     }
@@ -460,5 +492,19 @@ public class MyItemsActivity extends BaseActivity implements View.OnClickListene
         });
         mDialog.show();
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if (event != null && event.message.equals("refreshMyItems")) {
+            refresh();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(mContext);
+    }
+
 
 }

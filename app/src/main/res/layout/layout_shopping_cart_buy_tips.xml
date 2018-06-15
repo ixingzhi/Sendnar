@@ -3,6 +3,9 @@
     android:id="@+id/tv_buy_tips"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/space_12"
+    android:ellipsize="end"
+    android:maxLines="2"
+    android:padding="@dimen/space_8"
     android:text="您可以选择单一物品，或同时选择想要凑成一个礼品红包的商品，点击【微信送礼】或【送给自己】提交订单进行支付喔~"
-    android:textColor="@color/redOrange" />
+    android:textColor="@color/redOrange"
+    android:textSize="@dimen/text_size_13" />

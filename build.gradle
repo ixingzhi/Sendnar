@@ -34,8 +34,8 @@ ext {
     applicationId = "com.shichuang.sendnar"
     minSdkVersion = 19
     targetSdkVersion = 26
-    versionCode = 10
-    versionName = "1.1.0"
+    versionCode = 11
+    versionName = "1.1.1"
     supportVersion = '26.0.0-alpha1'
 }
 

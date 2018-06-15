@@ -39,7 +39,7 @@
 
     <Button
         android:id="@+id/btn_return_goods"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="26dp"
         android:layout_alignParentRight="true"
         android:layout_alignBottom="@+id/iv_picture"

@@ -29,6 +29,8 @@ public class BindPhoneNumberActivity extends BaseActivity implements View.OnClic
     private EditText mEtUsername;
     private EditText mEtVerificationCode;
     private TextView mTvGetVerificationCode;
+    private EditText mEtPassword;
+    private EditText mEtConfirmPassword;
     private Button mBtnBind;
 
     private String code = "";
@@ -44,6 +46,8 @@ public class BindPhoneNumberActivity extends BaseActivity implements View.OnClic
         mEtUsername = (EditText) findViewById(R.id.et_username);
         mEtVerificationCode = (EditText) findViewById(R.id.et_verification_code);
         mTvGetVerificationCode = (TextView) findViewById(R.id.tv_get_verification_code);
+        mEtPassword = (EditText) findViewById(R.id.et_password);
+        mEtConfirmPassword = (EditText) findViewById(R.id.et_confirm_password);
         mBtnBind = (Button) findViewById(R.id.btn_bind);
     }
 
@@ -144,6 +148,8 @@ public class BindPhoneNumberActivity extends BaseActivity implements View.OnClic
     private void checkInfo() {
         String username = mEtUsername.getText().toString().trim();
         String verificationCode = mEtVerificationCode.getText().toString().trim();
+        String password = mEtPassword.getText().toString().trim();
+        String confirmPassword = mEtConfirmPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(username)) {
             showToast("请输入手机号");
@@ -153,9 +159,20 @@ public class BindPhoneNumberActivity extends BaseActivity implements View.OnClic
             showToast("请输入验证码");
         } else if (!verificationCode.equals(code)) {
             showToast("验证码有误，请重新输入");
+        } else if (TextUtils.isEmpty(password)) {
+            showToast("请输入密码");
+        } else if (password.length() < 6) {
+            showToast("密码不能少于6个字符");
+        } else if (TextUtils.isEmpty(confirmPassword)) {
+            showToast("请输入确认密码");
+        } else if (confirmPassword.length() < 6) {
+            showToast("确认密码不能少于6个字符");
+        } else if (!password.equals(confirmPassword)) {
+            showToast("两次密码输入不一致");
         } else {
             Bundle bundle = new Bundle();
             bundle.putString("phoneNumber", username);
+            bundle.putString("password", password);
             bundle.putString("code", verificationCode);
             RxActivityTool.finish(mContext, bundle, RESULT_OK);
         }

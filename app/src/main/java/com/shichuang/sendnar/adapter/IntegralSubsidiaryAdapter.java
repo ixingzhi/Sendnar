@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.shichuang.open.tool.RxBigDecimalTool;
 import com.shichuang.open.tool.RxTimeTool;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.entify.Empty;
@@ -24,9 +25,9 @@ public class IntegralSubsidiaryAdapter extends BaseQuickAdapter<PointList.PointL
     protected void convert(final BaseViewHolder helper, final PointList.PointListModel item) {
         // 交易方式(收入=1|支出=2)
         if (item.getTradeType() == 1) {
-            helper.setText(R.id.tv_point, "+" + item.getPointUp());
+            helper.setText(R.id.tv_point, "+" + RxBigDecimalTool.toDecimal(item.getPoint(), 0));
         } else {
-            helper.setText(R.id.tv_point, "-" + item.getPointUp());
+            helper.setText(R.id.tv_point, "-" + RxBigDecimalTool.toDecimal(item.getPoint(), 0));
         }
         helper.setText(R.id.tv_time, RxTimeTool.stringFormat(item.getPointTradeTime()));
         helper.setText(R.id.tv_describe, item.getTradeDescribe());

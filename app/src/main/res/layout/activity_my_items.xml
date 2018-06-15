@@ -46,8 +46,8 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/ll_has_data"
+            <RelativeLayout
+                android:id="@+id/rl_has_data"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -56,12 +56,14 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/ll_bottom_bar" />
 
                 <LinearLayout
+                    android:id="@+id/ll_bottom_bar"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
+                    android:layout_alignParentBottom="true"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -114,7 +116,31 @@
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_to_send_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="160dp"
+                    android:background="@drawable/ic_to_send_me"
+                    android:gravity="right|center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="1"
+                        android:layout_marginLeft="@dimen/space_24"
+                        android:layout_marginRight="@dimen/space_10"
+                        android:layout_marginTop="@dimen/space_16"
+                        android:layout_marginBottom="@dimen/space_16"
+                        android:text="送给自己"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
 
         </FrameLayout>
 

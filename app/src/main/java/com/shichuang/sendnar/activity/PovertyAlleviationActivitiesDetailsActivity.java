@@ -1,7 +1,11 @@
 package com.shichuang.sendnar.activity;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -97,7 +101,7 @@ public class PovertyAlleviationActivitiesDetailsActivity extends BaseActivity im
             @Override
             public void onClick(View v) {
                 if (data != null) {
-                    if(Utils.isLogin(mContext)){
+                    if (Utils.isLogin(mContext)) {
                         share();
                     }
                 }
@@ -200,7 +204,13 @@ public class PovertyAlleviationActivitiesDetailsActivity extends BaseActivity im
             mWebView.loadUrl(Constants.MAIN_ENGINE_PIC + actionDetail.getH5Url());
         }
         if (actionItem != null) {
-            mTvGiftsPrice.setText("¥" + RxBigDecimalTool.toDecimal(actionItem.getPromotionPrice(), 2) + "/" + actionItem.getGoodsUnit());
+            // 修改多少元文字为黑色
+            String text = RxBigDecimalTool.toDecimal(actionItem.getPromotionPrice(), 2) + "元/" + actionItem.getGoodsUnit();
+            int startIndex = text.indexOf("/");
+            SpannableString span = new SpannableString(text);
+            ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#000000"));
+            span.setSpan(colorSpan, 0, startIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+            mTvGiftsPrice.setText(span);
         }
 
     }
@@ -211,7 +221,7 @@ public class PovertyAlleviationActivitiesDetailsActivity extends BaseActivity im
     private void share() {
         String type = isEnd ? "old" : "";
 
-        String url = Constants.MAIN_ENGINE_PIC + "/songnaerWechat/#/helpoordetail/" + id + "?type=" + type + "&from=share"+"&user="+ TokenCache.userId(mContext);
+        String url = Constants.MAIN_ENGINE_PIC + "/songnaerWechat/#/helpoordetail/" + id + "?type=" + type + "&from=share" + "&user=" + TokenCache.userId(mContext);
         String title = "";
         User user = UserCache.user(mContext);
         if (user == null) {

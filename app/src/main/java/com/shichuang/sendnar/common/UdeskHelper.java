@@ -16,7 +16,7 @@ import cn.udesk.UdeskSDKManager;
  */
 
 public class UdeskHelper {
-    private static final String DOMAIN = "15800805990.udesk.cn";
+    private static final String DOMAIN = "sendnar.udesk.cn";
     private static final String APP_KEY = "afdbd6ea71be4788f8cc17dee8c50eee";
     private static final String APP_ID = "e311f7440076fc65";
 

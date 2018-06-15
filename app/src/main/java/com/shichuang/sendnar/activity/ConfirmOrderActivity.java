@@ -3,6 +3,7 @@ package com.shichuang.sendnar.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -400,6 +401,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                                 Bundle bundle = new Bundle();
                                 bundle.putBoolean("payResult", true);
                                 bundle.putInt("buyType",buyType);
+                                bundle.putString("orderNo", commitOrder.getOrderNo());
                                 RxActivityTool.skipActivity(mContext, PayResultActivity.class, bundle);
                                 ConfirmOrderActivity.this.finish();
                             }
@@ -462,6 +464,7 @@ public class ConfirmOrderActivity extends BaseActivity implements View.OnClickLi
                                 Bundle bundle = new Bundle();
                                 bundle.putBoolean("payResult", true);
                                 bundle.putInt("buyType",buyType);
+                                bundle.putString("orderNo", commitOrder.getOrderNo());
                                 RxActivityTool.skipActivity(mContext, PayResultActivity.class, bundle);
                                 ConfirmOrderActivity.this.finish();
                             }

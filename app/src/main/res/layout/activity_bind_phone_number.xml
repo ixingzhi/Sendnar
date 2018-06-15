@@ -107,6 +107,82 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_16"
+        android:layout_marginRight="@dimen/space_16"
+        android:layout_marginTop="@dimen/space_16"
+        android:background="@drawable/bg_input_bind_phone_number"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/space_12"
+        android:paddingLeft="@dimen/space_24"
+        android:paddingRight="@dimen/space_24"
+        android:paddingTop="@dimen/space_12">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_verification_code" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="@dimen/space_12"
+            android:background="@color/gray" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_12"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_16"
+        android:layout_marginRight="@dimen/space_16"
+        android:layout_marginTop="@dimen/space_16"
+        android:background="@drawable/bg_input_bind_phone_number"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/space_12"
+        android:paddingLeft="@dimen/space_24"
+        android:paddingRight="@dimen/space_24"
+        android:paddingTop="@dimen/space_12">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_verification_code" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="@dimen/space_12"
+            android:background="@color/gray" />
+
+        <EditText
+            android:id="@+id/et_confirm_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_12"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="确认密码"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_bind"
@@ -115,10 +191,10 @@
         android:layout_marginLeft="@dimen/space_16"
         android:layout_marginRight="@dimen/space_16"
         android:layout_marginTop="@dimen/space_24"
-        android:text="立即绑定"
         android:background="@drawable/ic_btn_gradual_change_orange"
-        android:textSize="@dimen/text_size_16"
-        android:textColor="@color/white" />
+        android:text="立即绑定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16" />
 
 
 </LinearLayout>

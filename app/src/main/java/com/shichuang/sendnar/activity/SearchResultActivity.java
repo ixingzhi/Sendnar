@@ -104,7 +104,7 @@ public class SearchResultActivity extends BaseActivity {
     private void getGoodsListData() {
         OkGo.<AMBaseDto<GoodsList>>get(Constants.searchGoodsByGoodsNameUrl)
                 .tag(mContext)
-                .params("type_id", typeId)
+                //.params("type_id", typeId)
                 .params("pageSize", pageSize)
                 .params("pageIndex", pageIndex)
                 .params("festival_id", giftObjectId)   // 送礼对象

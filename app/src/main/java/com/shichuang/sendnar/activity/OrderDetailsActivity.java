@@ -158,7 +158,8 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.rl_logistics_status:
                 Bundle bundle2 = new Bundle();
-                bundle2.putString("orderNo", orderNo);
+                bundle2.putString("logisticsNo", orderNo);
+                bundle2.putString("logisticsCompany", orderNo);
                 RxActivityTool.skipActivity(mContext, LogisticsStatusActivity.class,bundle2);
                 break;
             case R.id.btn_cancel_order:
@@ -289,6 +290,7 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
         mTvCloseTime.setText("关闭时间：" + (!TextUtils.isEmpty(orderInfo.getClosingTime()) ? RxTimeTool.stringFormat(orderInfo.getClosingTime()) : ""));
         // 商品列表
         mAdapter.replaceData(data.getOrderDetailsGoodsList());
+        mAdapter.setOrderStatus(data.getOrderDetailsModel().getOrderStatus());
         // 设置商品操作状态
         setOrderOperation(data.getOrderDetailsModel().getOrderStatus());
         // 获取物流消息
@@ -387,7 +389,8 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
     private void getLogisticsData() {
         OkGo.<AMBaseDto<String>>get(Constants.getLogisticsMsgUrl)
                 .tag(mContext)
-                .params("id", orderNo)
+                .params("express_no", "")
+                .params("com", "")
                 .execute(new NewsCallback<AMBaseDto<String>>() {
                     @Override
                     public void onStart(Request<AMBaseDto<String>, ? extends Request> request) {

@@ -34,6 +34,7 @@ import com.shichuang.sendnar.activity.GiftsDetailsActivity;
 import com.shichuang.sendnar.activity.MessageActivity;
 import com.shichuang.sendnar.activity.PovertyAlleviationActivitiesActivity;
 import com.shichuang.sendnar.activity.PovertyAlleviationActivitiesDetailsActivity;
+import com.shichuang.sendnar.activity.SearchActivity;
 import com.shichuang.sendnar.adapter.HomeAdapter;
 import com.shichuang.sendnar.common.Constants;
 import com.shichuang.sendnar.common.GiftsDetailsType;
@@ -63,7 +64,7 @@ import cn.udesk.model.MsgNotice;
  * Created by Administrator on 2018/4/16.
  */
 
-public class HomeFragment extends BaseFragment  implements OnTabReselectListener {
+public class HomeFragment extends BaseFragment implements OnTabReselectListener {
     private RxEmptyLayout mEmptyLayout;
     private VerticalSwipeRefreshLayout mSwipeRefreshLayout;
     private Banner mBanner;
@@ -209,6 +210,12 @@ public class HomeFragment extends BaseFragment  implements OnTabReselectListener
                 if (Utils.isLogin(mContext)) {
                     UdeskHelper.entryChat(mContext);
                 }
+            }
+        });
+        mContentView.findViewById(R.id.tv_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RxActivityTool.skipActivity(mContext, SearchActivity.class);
             }
         });
         mContentView.findViewById(R.id.ll_message).setOnClickListener(new View.OnClickListener() {

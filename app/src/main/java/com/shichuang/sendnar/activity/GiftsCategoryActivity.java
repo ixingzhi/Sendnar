@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,6 +22,7 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.tool.RxActivityTool;
+import com.shichuang.open.tool.RxScreenTool;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.adapter.GiftsListAdapter;
 import com.shichuang.sendnar.common.Constants;
@@ -119,6 +121,11 @@ public class GiftsCategoryActivity extends BaseActivity {
             public void OnBannerClick(int position) {
             }
         });
+        // 设置比例尺寸 300 * 750
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBanner.getLayoutParams();
+        // 根据比例获取高度
+        int height = (int) ((float) 300 * RxScreenTool.getDisplayMetrics(mContext).widthPixels / 750);
+        params.height = height;
     }
 
     @Override

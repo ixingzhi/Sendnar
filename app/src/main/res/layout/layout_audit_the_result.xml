@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/space_12">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:background="@drawable/bg_logistics_point_current" />
+
+                <TextView
+                    android:id="@+id/tv_apply_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space_12"
+                    android:text="买家申请换货"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_apply_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space_12"
+                    android:text="2018-06-13"
+                    android:textColor="@color/textColor2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_12"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:background="@drawable/bg_logistics_point_pass" />
+
+                <TextView
+                    android:id="@+id/tv_type_instructions_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space_12"
+                    android:text="换货说明"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_type_instructions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/space_12"
+                    android:text="我买错了"
+                    android:textColor="@color/textColor2" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_handle_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_handle_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/space_12"
+                android:text="2018.06.13"
+                android:textColor="@color/textColor2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_8"
+                android:layout_marginRight="@dimen/space_8"
+                android:background="@drawable/ic_btn_gradual_change_orange"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_handle_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/space_12"
+                    android:text="平台已同意您的换货"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/space_12">
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:background="@drawable/bg_white_circle" />
+
+                    <TextView
+                        android:id="@+id/tv_handle_result_instructions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space_12"
+                        android:text="必须要等到卖家收到货才能返回您的钱"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_buyers_delivery_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_buyers_delivery_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/space_12"
+                android:text="2018.06.13"
+                android:textColor="@color/textColor2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_8"
+                android:layout_marginRight="@dimen/space_8"
+                android:background="@drawable/bg_white_radius_4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/space_12"
+                    android:text="买家已发货"
+                    android:textColor="@color/textColor1" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_12">
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="@dimen/space_6"
+                        android:background="@drawable/bg_black_circle" />
+
+                    <TextView
+                        android:id="@+id/tv_logistics_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:text="物流订单：1235 4821 5248"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_logistics_company"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_logistics_order"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="@dimen/space_12"
+                        android:layout_toStartOf="@+id/tv_logistics_details"
+                        android:text="物流公司：顺丰快递"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_logistics_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_logistics_company"
+                        android:layout_alignParentRight="true"
+                        android:text="详情"
+                        android:textColor="@color/redOrange" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_platform_take_goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_platform_take_goods_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/space_12"
+                android:text="2018.06.13"
+                android:textColor="@color/textColor2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_8"
+                android:layout_marginRight="@dimen/space_8"
+                android:background="@drawable/ic_btn_gradual_change_orange"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/space_12"
+                    android:text="平台已收货"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/space_12">
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:background="@drawable/bg_white_circle" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space_12"
+                        android:text="请耐心等待平台发货"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_platform_delivery_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_platform_delivery_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/space_12"
+                android:text="2018.06.13"
+                android:textColor="@color/textColor2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_8"
+                android:layout_marginRight="@dimen/space_8"
+                android:background="@drawable/ic_btn_gradual_change_orange"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/space_12"
+                    android:text="平台已发货"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_12">
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="@dimen/space_6"
+                        android:background="@drawable/bg_white_circle" />
+
+                    <TextView
+                        android:id="@+id/tv_platform_logistics_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:text="物流订单：1235 4821 5248"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_platform_logistics_company"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_platform_logistics_order"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="@dimen/space_12"
+                        android:layout_toStartOf="@+id/tv_platform_logistics_details"
+                        android:text="物流公司：顺丰快递"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_platform_logistics_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_platform_logistics_company"
+                        android:layout_alignParentRight="true"
+                        android:text="详情"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_buyer_time_of_receipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_buyer_time_of_receipt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/space_12"
+                android:text="2018.06.13"
+                android:textColor="@color/textColor2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_8"
+                android:layout_marginRight="@dimen/space_8"
+                android:background="@drawable/bg_white_radius_4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/space_12"
+                    android:text="卖家已收货"
+                    android:textColor="@color/textColor1" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/space_12">
+
+                    <View
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:background="@drawable/bg_black_circle" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/space_12"
+                        android:text="恭喜您换货成功！"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_exchange_goods_success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/space_12"
+                android:src="@drawable/ic_audit_success" />
+
+            <TextView
+                android:id="@+id/tv_exchange_goods_success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/space_12"
+                android:text="换货成功"
+                android:textColor="@color/redOrange" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -47,6 +48,7 @@ public class PayResultActivity extends BaseActivity implements View.OnClickListe
     private boolean payResult;
     // 购买类型
     private int buyType;
+    private String orderNo;
 
     @Override
     public int getLayoutId() {
@@ -58,6 +60,7 @@ public class PayResultActivity extends BaseActivity implements View.OnClickListe
     public void initView(Bundle savedInstanceState, View view) {
         payResult = getIntent().getBooleanExtra("payResult", false);
         buyType = getIntent().getIntExtra("buyType", 0);
+        orderNo = getIntent().getStringExtra("orderNo");
         mRlTitleBar = (RelativeLayout) findViewById(R.id.rl_title_bar);
         // 获取状态栏的高度
         int statusBarHeight = RxStatusBarTool.getStatusBarHeight(mContext);
@@ -80,7 +83,9 @@ public class PayResultActivity extends BaseActivity implements View.OnClickListe
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    RxActivityTool.skipActivity(mContext, MyItemsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("orderNo", orderNo);
+                    RxActivityTool.skipActivity(mContext, MyItemsActivity.class, bundle);
                     PayResultActivity.this.finish();
                 }
             }, 800);

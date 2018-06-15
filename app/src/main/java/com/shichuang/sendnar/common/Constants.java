@@ -172,4 +172,14 @@ public interface Constants {
     String fillInTheLogisticsUrl = MAIN_ENGINE + "/api/v1/goods_refund_transform/submit";
     // 获取退货换货原因
     String refundReturnGoodsReasonUrl = MAIN_ENGINE + "/api/v1/refund/refund_cause";
+    // 退货退款，提交
+    String refundReturnGoodsCommitUrl = MAIN_ENGINE + "/api/v1/goods_refund/submit";
+    // 物流公司
+    String logisticsCompanyListUrl = MAIN_ENGINE + "/api/v1/logistics_company";
+    // 退换货详情
+    String refundInfoUrl = MAIN_ENGINE + "/api/v1/goods_refund_cancel/refundInfo";
+    // 我的物品，送给自己
+    String myItemsToSendMeConfirmOrderUrl = MAIN_ENGINE + "/api/v1/gift/gift_pack_receive_page";
+    // 我的物品，提交订单
+    String myItemsToSendMeCommitOrderUrl = MAIN_ENGINE + "/api/v1/gift/gift_pack_receive";
 }

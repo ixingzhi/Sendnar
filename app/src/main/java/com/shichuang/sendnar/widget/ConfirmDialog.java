@@ -16,7 +16,7 @@ import com.shichuang.sendnar.R;
  */
 
 public class ConfirmDialog extends BaseDialog implements View.OnClickListener {
-    private View view;
+    private View mView;
     private TextView mTitle;
     private TextView mMessage;
     private Button mBtnNegative;
@@ -27,17 +27,17 @@ public class ConfirmDialog extends BaseDialog implements View.OnClickListener {
 
     public ConfirmDialog(Context context) {
         super(context, 0.6f, Gravity.CENTER);
-        view = LayoutInflater.from(mContext).inflate(R.layout.dialog_confirm, null);
-        setContentView(view);
+        mView = LayoutInflater.from(mContext).inflate(R.layout.dialog_confirm, null);
+        setContentView(mView);
         initView();
         initEvent();
     }
 
     private void initView() {
-        mTitle = view.findViewById(R.id.tv_title);
-        mMessage = view.findViewById(R.id.tv_message);
-        mBtnNegative = view.findViewById(R.id.btn_negative);
-        mBtnPositive = view.findViewById(R.id.btn_positive);
+        mTitle = mView.findViewById(R.id.tv_title);
+        mMessage = mView.findViewById(R.id.tv_message);
+        mBtnNegative = mView.findViewById(R.id.btn_negative);
+        mBtnPositive = mView.findViewById(R.id.btn_positive);
     }
 
     private void initEvent() {

@@ -273,6 +273,7 @@ public class OrderSettlementActivity extends BaseActivity implements View.OnClic
         Bundle bundle = new Bundle();
         bundle.putBoolean("payResult", isPaySuccess);
         bundle.putInt("buyType", buyType);
+        bundle.putString("orderNo",orderNo);
         RxActivityTool.skipActivity(mContext, PayResultActivity.class, bundle);
         OrderSettlementActivity.this.finish();
     }

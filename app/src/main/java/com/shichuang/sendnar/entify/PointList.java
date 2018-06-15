@@ -38,10 +38,7 @@ public class PointList {
         private String tradeDescribe;   // 交易类型描述(类似于标签)
         @SerializedName("point_trade_time")
         private String pointTradeTime;
-        @SerializedName("point_up")
-        private int pointUp;  // 增加积分
-        @SerializedName("point_down")
-        private int pointDown;  // 减少积分
+        private String point;
         private boolean isOpen;  // 是否点击打开
 
         public String getPointDescription() {
@@ -76,20 +73,12 @@ public class PointList {
             this.pointTradeTime = pointTradeTime;
         }
 
-        public int getPointUp() {
-            return pointUp;
+        public String getPoint() {
+            return point;
         }
 
-        public void setPointUp(int pointUp) {
-            this.pointUp = pointUp;
-        }
-
-        public int getPointDown() {
-            return pointDown;
-        }
-
-        public void setPointDown(int pointDown) {
-            this.pointDown = pointDown;
+        public void setPoint(String point) {
+            this.point = point;
         }
 
         public boolean isOpen() {

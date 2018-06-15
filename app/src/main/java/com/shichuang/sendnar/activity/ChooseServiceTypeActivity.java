@@ -53,7 +53,9 @@ public class ChooseServiceTypeActivity extends BaseActivity {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("orderInfo", orderInfo);
+                bundle.putInt("operateType",1);   // 1-退款 2-退款退货 3-换货
                 RxActivityTool.skipActivity(mContext, RefundReturnGoodsActivity.class, bundle);
+                finish();
             }
         });
         findViewById(R.id.rl_refund_and_return_goods).setOnClickListener(new View.OnClickListener() {
@@ -61,7 +63,9 @@ public class ChooseServiceTypeActivity extends BaseActivity {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("orderInfo", orderInfo);
+                bundle.putInt("operateType",2);   // 1-退款 2-退款退货 3-换货
                 RxActivityTool.skipActivity(mContext, RefundReturnGoodsActivity.class, bundle);
+                finish();
             }
         });
         findViewById(R.id.rl_exchange_goods).setOnClickListener(new View.OnClickListener() {
@@ -69,7 +73,9 @@ public class ChooseServiceTypeActivity extends BaseActivity {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("orderInfo", orderInfo);
+                bundle.putInt("operateType",3);   // 1-退款 2-退款退货 3-换货
                 RxActivityTool.skipActivity(mContext, ApplyExchangeGoodsActivity.class, bundle);
+                finish();
             }
         });
     }

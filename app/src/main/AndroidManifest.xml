@@ -260,6 +260,14 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
+            android:name=".activity.SearchActivity"
+            android:label="搜索"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyItemsToSendMeConfirmOrderActivity"
+            android:label="我的物品、送给自己"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.LogoutDialogActivity"
             android:label="账号冲突退出登录"
             android:screenOrientation="portrait"
