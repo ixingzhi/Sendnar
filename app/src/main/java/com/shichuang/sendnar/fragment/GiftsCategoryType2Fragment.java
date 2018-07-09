@@ -28,6 +28,7 @@ import com.shichuang.sendnar.common.NewsCallback;
 import com.shichuang.sendnar.entify.AMBaseDto;
 import com.shichuang.sendnar.entify.ActionList;
 import com.shichuang.sendnar.entify.Empty;
+import com.shichuang.sendnar.entify.ExchangeGift;
 import com.shichuang.sendnar.entify.GiftsCategoryType2;
 import com.shichuang.sendnar.tool.BannerImageLoader;
 import com.youth.banner.Banner;
@@ -53,6 +54,8 @@ public class GiftsCategoryType2Fragment extends BaseFragment {
     private int pageSize = 10;
     private int pageIndex = 1;
 
+    private ExchangeGift exchangeGift;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_gifts_category_type_2;
@@ -61,6 +64,8 @@ public class GiftsCategoryType2Fragment extends BaseFragment {
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         priceTypeId = getArguments().getInt("priceTypeId");
+        exchangeGift = (ExchangeGift) getArguments().getSerializable("exchangeGift");
+
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.layout_gifts_category_type_2_header, (ViewGroup) mContentView.findViewById(android.R.id.content), false);
         initBanner();
@@ -98,6 +103,7 @@ public class GiftsCategoryType2Fragment extends BaseFragment {
         mRecyclerView = mContentView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter = new GiftsCategoryType2Adapter();
+        mAdapter.setExchangeGift(exchangeGift);
         mAdapter.setPreLoadNumber(2);
         mAdapter.addHeaderView(mHeaderView);
         mRecyclerView.setAdapter(mAdapter);
@@ -117,7 +123,8 @@ public class GiftsCategoryType2Fragment extends BaseFragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", Integer.valueOf(mAdapter.getData().get(position).getActionItemId()));
                 bundle.putInt("operationType", GiftsDetailsType.ACTION_GOODS_DETAILS);
-                bundle.putBoolean("isHideAddShoppingCart",true);
+                bundle.putBoolean("isHideAddShoppingCart", true);
+                bundle.putSerializable("exchangeGift", exchangeGift);
                 RxActivityTool.skipActivity(mContext, GiftsDetailsActivity.class, bundle);
             }
         });

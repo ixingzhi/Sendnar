@@ -47,7 +47,7 @@ public class OrderDetailsAdapter extends BaseQuickAdapter<OrderDetails.OrderDeta
         this.isOrderDetailsPage = bool;
     }
 
-    public void setOrderStatus(int status){
+    public void setOrderStatus(int status) {
         this.orderStatus = status;
     }
 
@@ -63,10 +63,10 @@ public class OrderDetailsAdapter extends BaseQuickAdapter<OrderDetails.OrderDeta
         switch (item.getRefundStatus()) {
             case 0:
                 // 待付款和交易关闭不显示
-                if(orderStatus == OrderStatus.WAIT_PAYMENT || orderStatus == OrderStatus.TRADING_CLOSED){
+                if (orderStatus == OrderStatus.WAIT_PAYMENT || orderStatus == OrderStatus.TRADING_CLOSED) {
                     btnReturnGoods.setVisibility(View.GONE);
-                }else{
-                    btnReturnGoods.setText("退/换货");
+                } else {
+                    btnReturnGoods.setText("退换");
                     btnReturnGoods.setVisibility(View.VISIBLE);
                     // 选择服务类型
                     Bundle bundle = new Bundle();
@@ -75,7 +75,7 @@ public class OrderDetailsAdapter extends BaseQuickAdapter<OrderDetails.OrderDeta
                 }
                 break;
             case 1:  // 待卖家处理=1
-                btnReturnGoods.setText("待卖家处理");
+                btnReturnGoods.setText("待处理");
                 btnReturnGoods.setVisibility(View.VISIBLE);
                 // 商品售后审核
                 Bundle bundle1 = new Bundle();
@@ -83,22 +83,23 @@ public class OrderDetailsAdapter extends BaseQuickAdapter<OrderDetails.OrderDeta
                 skipPage(btnReturnGoods, GoodsAfterAuditActivity.class, bundle1);
                 break;
             case 2:  // 卖家拒绝退款/退货/换货=2
-                btnReturnGoods.setText("卖家拒绝");
+                btnReturnGoods.setText("已拒绝");
                 btnReturnGoods.setVisibility(View.VISIBLE);
                 // 商品售后审核
                 Bundle bundle2 = new Bundle();
                 bundle2.putInt("orderDetailId", item.getOrderDetailId());
                 skipPage(btnReturnGoods, GoodsAfterAuditActivity.class, bundle2);
                 break;
-            case 3:  // 待买家退货=3
+            case 3:  // 待买家退货=3         是否需要退货(我需要退货=1|不需要退货=2|换货=3)
                 btnReturnGoods.setText("填写物流");
                 btnReturnGoods.setVisibility(View.VISIBLE);
                 Bundle bundle3 = new Bundle();
                 bundle3.putInt("orderDetailId", item.getOrderDetailId());
                 skipPage(btnReturnGoods, FillInTheLogisticsActivity.class, bundle3);
+
                 break;
             case 4:  // 买家已退货,等待卖家确认收货=4
-                btnReturnGoods.setText("待卖家确认收货");
+                btnReturnGoods.setText("买家已发货");
                 btnReturnGoods.setVisibility(View.VISIBLE);
                 // 商品售后审核
                 Bundle bundle4 = new Bundle();
@@ -106,7 +107,7 @@ public class OrderDetailsAdapter extends BaseQuickAdapter<OrderDetails.OrderDeta
                 skipPage(btnReturnGoods, GoodsAfterAuditActivity.class, bundle4);
                 break;
             case 5:  // 卖家已退款=5
-                btnReturnGoods.setText("卖家已退款");
+                btnReturnGoods.setText("已退款");
                 btnReturnGoods.setVisibility(View.VISIBLE);
                 // 商品售后审核
                 Bundle bundle5 = new Bundle();
@@ -114,7 +115,7 @@ public class OrderDetailsAdapter extends BaseQuickAdapter<OrderDetails.OrderDeta
                 skipPage(btnReturnGoods, GoodsAfterAuditActivity.class, bundle5);
                 break;
             case 6:  // 待财务打款=6
-                btnReturnGoods.setText("待财务打款");
+                btnReturnGoods.setText("待退款");
                 btnReturnGoods.setVisibility(View.VISIBLE);
                 // 商品售后审核
                 Bundle bundle6 = new Bundle();
@@ -138,12 +139,19 @@ public class OrderDetailsAdapter extends BaseQuickAdapter<OrderDetails.OrderDeta
                 skipPage(btnReturnGoods, GoodsAfterAuditActivity.class, bundle8);
                 break;
             case 9:  // 买家取消=9
-                btnReturnGoods.setText("买家取消");
+                btnReturnGoods.setText("已取消");
                 btnReturnGoods.setVisibility(View.VISIBLE);
                 // 商品售后审核
                 Bundle bundle9 = new Bundle();
                 bundle9.putInt("orderDetailId", item.getOrderDetailId());
                 skipPage(btnReturnGoods, GoodsAfterAuditActivity.class, bundle9);
+                break;
+            case 10:
+                btnReturnGoods.setText("已换货");
+                btnReturnGoods.setVisibility(View.VISIBLE);
+                Bundle bundle10 = new Bundle();
+                bundle10.putInt("orderDetailId", item.getOrderDetailId());
+                skipPage(btnReturnGoods, GoodsAfterAuditActivity.class, bundle10);
                 break;
 
             default:

@@ -160,12 +160,12 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
                 Bundle bundle2 = new Bundle();
                 bundle2.putString("logisticsNo", orderNo);
                 bundle2.putString("logisticsCompany", orderNo);
-                RxActivityTool.skipActivity(mContext, LogisticsStatusActivity.class,bundle2);
+                RxActivityTool.skipActivity(mContext, LogisticsStatusActivity.class, bundle2);
                 break;
             case R.id.btn_cancel_order:
                 ConfirmDialog mDialogCancelOrder = new ConfirmDialog(mContext);
                 mDialogCancelOrder.setMessage("确认取消订单？");
-                mDialogCancelOrder.setNegativeButton("取消",null);
+                mDialogCancelOrder.setNegativeButton("取消", null);
                 mDialogCancelOrder.setPositiveButton("确定", new ConfirmDialog.DialogInterface() {
                     @Override
                     public void OnClickListener() {
@@ -176,13 +176,13 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.btn_check_logistics:
                 Bundle bundle = new Bundle();
-                bundle.putString("orderNo", orderNo);
+                bundle.putString("orderId", id + "");
                 RxActivityTool.skipActivity(mContext, LogisticsStatusActivity.class, bundle);
                 break;
             case R.id.btn_delete_order:
                 ConfirmDialog mDialogDeleteOrder = new ConfirmDialog(mContext);
                 mDialogDeleteOrder.setMessage("确认删除订单？");
-                mDialogDeleteOrder.setNegativeButton("取消",null);
+                mDialogDeleteOrder.setNegativeButton("取消", null);
                 mDialogDeleteOrder.setPositiveButton("确定", new ConfirmDialog.DialogInterface() {
                     @Override
                     public void OnClickListener() {
@@ -194,7 +194,7 @@ public class OrderDetailsActivity extends BaseActivity implements View.OnClickLi
             case R.id.btn_confirm_goods:
                 ConfirmDialog mDialogConfirmGoods = new ConfirmDialog(mContext);
                 mDialogConfirmGoods.setMessage("确认已收到货物？");
-                mDialogConfirmGoods.setNegativeButton("取消",null);
+                mDialogConfirmGoods.setNegativeButton("取消", null);
                 mDialogConfirmGoods.setPositiveButton("确定", new ConfirmDialog.DialogInterface() {
                     @Override
                     public void OnClickListener() {

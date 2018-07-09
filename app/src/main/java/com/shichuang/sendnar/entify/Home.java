@@ -2,6 +2,7 @@ package com.shichuang.sendnar.entify;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class Home {
         this.listpics = listpics;
     }
 
-    public static class Banner {
+    public static class Banner implements Serializable{
         private int id;
         private String pic;
         @SerializedName("pic_value_type")

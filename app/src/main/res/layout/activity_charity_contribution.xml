@@ -16,6 +16,7 @@
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tb_right_icon="@drawable/ic_query"
             app:tb_title="排行榜">
 
         </com.shichuang.sendnar.widget.RxTitleBar>
@@ -48,30 +49,23 @@
                     android:textSize="@dimen/text_size_16" />
 
                 <ImageView
-                    android:id="@+id/iv_query"
+                    android:id="@+id/iv_consumption_sort"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/space_12"
+                    android:layout_marginLeft="@dimen/space_8"
                     android:padding="@dimen/space_4"
-                    android:src="@drawable/ic_query" />
+                    android:src="@drawable/ic_arrows_right_gray" />
 
                 <TextView
-                    android:id="@+id/tv_amount_due_this_month"
+                    android:id="@+id/tv_consumption_sort"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/iv_query"
-                    android:text="本月金额"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/tv_amount_due_this_month"
-                    android:layout_below="@+id/tv_amount_due_this_month"
-                    android:layout_marginTop="@dimen/space_2"
-                    android:text="累计金额"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/iv_consumption_sort"
+                    android:gravity="center"
+                    android:text="消费排序"
                     android:textColor="@color/white" />
 
             </RelativeLayout>

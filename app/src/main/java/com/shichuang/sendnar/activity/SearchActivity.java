@@ -9,17 +9,25 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.Request;
 import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.tool.RxActivityTool;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.adapter.HistorySearchAdapter;
-import com.shichuang.sendnar.common.OrderOperation;
+import com.shichuang.sendnar.common.Constants;
+import com.shichuang.sendnar.common.NewsCallback;
 import com.shichuang.sendnar.common.SearchCache;
+import com.shichuang.sendnar.entify.AMBaseDto;
+import com.shichuang.sendnar.entify.KeyWord;
 import com.shichuang.sendnar.widget.ConfirmDialog;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,8 +37,9 @@ import java.util.List;
 public class SearchActivity extends BaseActivity {
     private EditText mEtSearch;
     private HistorySearchAdapter mAdHistorySearch;
+    private HistorySearchAdapter mAdHotSearch;
 
-    private List<String> historySearchList;
+    private List<KeyWord> historySearchList;
 
     @Override
     public int getLayoutId() {
@@ -57,9 +66,8 @@ public class SearchActivity extends BaseActivity {
         lmHotSearch.setFlexWrap(FlexWrap.WRAP);
         lmHotSearch.setAlignItems(AlignItems.STRETCH);
         mRvHotSearch.setLayoutManager(lmHotSearch);
-        HistorySearchAdapter mAdHotSearch = new HistorySearchAdapter();
+        mAdHotSearch = new HistorySearchAdapter();
         mRvHotSearch.setAdapter(mAdHotSearch);
-        //mAdHotSearch.addData(historySearchList);
     }
 
     @Override
@@ -79,9 +87,11 @@ public class SearchActivity extends BaseActivity {
                 mDialog.setPositiveButton("确定", new ConfirmDialog.DialogInterface() {
                     @Override
                     public void OnClickListener() {
-                        historySearchList.clear();
-                        SearchCache.update(mContext, historySearchList);
-                        mAdHistorySearch.replaceData(historySearchList);
+                        if (historySearchList != null && historySearchList.size() > 0) {
+                            historySearchList.clear();
+                            SearchCache.update(mContext, historySearchList);
+                            mAdHistorySearch.replaceData(historySearchList);
+                        }
                     }
                 });
                 mDialog.show();
@@ -92,27 +102,81 @@ public class SearchActivity extends BaseActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     String searchContent = mEtSearch.getText().toString().trim();
-                    if (!TextUtils.isEmpty(searchContent)) {
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("typeId", 13);
-                        bundle.putString("content", searchContent);
-                        RxActivityTool.skipActivity(mContext, SearchResultActivity.class, bundle);
-
-                        // 如果有相同的搜索文字，则删除
-                        if (historySearchList.contains(searchContent)) {
-                            historySearchList.remove(searchContent);
-                        }
-                        historySearchList.add(0, searchContent);
-                        SearchCache.update(mContext, historySearchList);
-                        mAdHistorySearch.replaceData(historySearchList);
-                    }
+                    search(searchContent);
                 }
                 return false;
+            }
+        });
+        mAdHistorySearch.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                search(mAdHistorySearch.getItem(position).getWord());
+            }
+        });
+        mAdHotSearch.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                search(mAdHotSearch.getItem(position).getWord());
             }
         });
     }
 
     @Override
     public void initData() {
+        getHotWordData();
+    }
+
+    private void getHotWordData() {
+        OkGo.<AMBaseDto<List<KeyWord>>>get(Constants.hotWordUrl)
+                .tag(mContext)
+                .execute(new NewsCallback<AMBaseDto<List<KeyWord>>>() {
+                    @Override
+                    public void onStart(Request<AMBaseDto<List<KeyWord>>, ? extends Request> request) {
+                        super.onStart(request);
+                    }
+
+                    @Override
+                    public void onSuccess(final Response<AMBaseDto<List<KeyWord>>> response) {
+                        if (response.body().code == 0 && response.body().data != null) {
+                            mAdHotSearch.replaceData(response.body().data);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<AMBaseDto<List<KeyWord>>> response) {
+                        super.onError(response);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                    }
+                });
+    }
+
+    private void search(final String content) {
+        if (!TextUtils.isEmpty(content)) {
+            // 如果有相同的搜索文字，则删除
+            Iterator<KeyWord> iterable = historySearchList.iterator();
+            while (iterable.hasNext()) {
+                if (content.equals(iterable.next().getWord())) {
+                    iterable.remove();
+                }
+            }
+//            for (KeyWord word : historySearchList) {
+//                if (word.getWord().equals(content)) {
+//                    //historySearchList.remove(word);
+//                }
+//            }
+            historySearchList.add(0, new KeyWord(content));
+            SearchCache.update(mContext, historySearchList);
+            mAdHistorySearch.replaceData(historySearchList);
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("typeId", 13);
+            bundle.putString("content", content);
+            RxActivityTool.skipActivity(mContext, SearchResultActivity.class, bundle);
+        }
+
     }
 }

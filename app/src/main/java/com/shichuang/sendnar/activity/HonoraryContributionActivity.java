@@ -16,6 +16,7 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.tool.RxActivityTool;
+import com.shichuang.open.tool.RxBigDecimalTool;
 import com.shichuang.open.tool.RxGlideTool;
 import com.shichuang.open.tool.RxStatusBarTool;
 import com.shichuang.open.tool.RxToastTool;
@@ -88,7 +89,7 @@ public class HonoraryContributionActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //RxActivityTool.skipActivity(mContext, HonorGuideActivity.class);
-                SinglePage.getInstance().toPage(mContext, "勋章指南", SinglePage.THE_MEDAL_OF_GUIDE,"");
+                SinglePage.getInstance().toPage(mContext, "勋章指南", SinglePage.THE_MEDAL_OF_GUIDE, "");
             }
         });
     }
@@ -133,7 +134,7 @@ public class HonoraryContributionActivity extends BaseActivity {
         HonoraryContribution.UserInfo userInfo = data.getCharitable();
         if (userInfo != null) {
             RxGlideTool.loadImageView(mContext, Utils.getSingleImageUrlByImageUrls(userInfo.getHeadPortrait()), mIvAvatar, R.drawable.ic_avatar_default);
-            mTvHonor.setText(userInfo.getCharitable());
+            mTvHonor.setText(RxBigDecimalTool.toDecimal(userInfo.getCharitable(), 0));
             mTvHonorLevel.setText(userInfo.getLevelName());
         }
         if (data.getPicList() != null) {

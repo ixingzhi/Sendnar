@@ -18,6 +18,7 @@ import com.shichuang.sendnar.adapter.GiftsCategoryType1Adapter;
 import com.shichuang.sendnar.common.Constants;
 import com.shichuang.sendnar.common.NewsCallback;
 import com.shichuang.sendnar.entify.AMBaseDto;
+import com.shichuang.sendnar.entify.ExchangeGift;
 import com.shichuang.sendnar.entify.GiftsCategoryType1;
 
 import java.util.List;
@@ -34,6 +35,8 @@ public class GiftsCategoryType1Fragment extends BaseFragment {
     private int typeId;
     private int priceTypeId;
 
+    private ExchangeGift exchangeGift;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_gifts_category_type_1;
@@ -43,6 +46,8 @@ public class GiftsCategoryType1Fragment extends BaseFragment {
     public void initView(Bundle savedInstanceState, View view) {
         typeId = getArguments().getInt("typeId");
         priceTypeId = getArguments().getInt("priceTypeId");
+        exchangeGift = (ExchangeGift) getArguments().getSerializable("exchangeGift");
+
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         initRecyclerView();
     }
@@ -70,6 +75,7 @@ public class GiftsCategoryType1Fragment extends BaseFragment {
                 bundle.putInt("giftObjectId", mAdapter.getItem(position).getId());
                 bundle.putInt("typeId", typeId);
                 bundle.putInt("priceTypeId", priceTypeId);
+                bundle.putSerializable("exchangeGift", exchangeGift);
                 RxActivityTool.skipActivity(mContext, GiftsCategoryActivity.class, bundle);
             }
         });

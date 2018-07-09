@@ -17,7 +17,8 @@
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tb_title="收益金额">
+            app:tb_title="收益金额"
+            app:tb_right_icon="@drawable/ic_look_withdrawal_record">
 
         </com.shichuang.sendnar.widget.RxTitleBar>
     </android.support.v7.widget.Toolbar>
@@ -58,20 +59,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="温馨提示"
-        android:textColor="@color/textColor2" />
+        android:textColor="@color/textColor2"
+        android:textSize="@dimen/text_size_13"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_8"
-        android:text="提现时，平台已帮您代扣代缴"
-        android:textColor="@color/textColor2" />
+        android:text="提现时，平台将为您代扣提现"
+        android:textColor="@color/textColor2"
+        android:textSize="@dimen/text_size_12"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/space_35"
-        android:text="个人所得税及提现手续费。"
-        android:textColor="@color/textColor2" />
+        android:text="金额的税金和提现手续费（合计6%）"
+        android:textColor="@color/textColor2"
+        android:textSize="@dimen/text_size_12"/>
 
 </LinearLayout>

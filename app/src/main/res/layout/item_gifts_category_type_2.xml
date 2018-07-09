@@ -16,7 +16,7 @@
             android:layout_width="90dp"
             android:layout_height="80dp"
             android:background="@color/windowBackground"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tv_gifts_name"
@@ -64,7 +64,7 @@
             android:layout_height="20dp"
             android:layout_marginLeft="@dimen/space_8"
             android:src="@drawable/ic_shopping_cart"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <Space
             android:layout_width="0dp"
@@ -88,6 +88,17 @@
             android:text="送给自己"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_12" />
+
+        <Button
+            android:id="@+id/btn_exchange_gift"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_gradual_change_orange"
+            android:text="换礼物"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_12"
+            android:visibility="gone" />
+
 
     </LinearLayout>
 

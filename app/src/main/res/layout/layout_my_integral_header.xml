@@ -69,6 +69,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="@dimen/space_12"
-        android:text="—— 为您优选 ——"
+        android:text="— 为您优选 —"
         android:textColor="@color/textColor2" />
 </LinearLayout>

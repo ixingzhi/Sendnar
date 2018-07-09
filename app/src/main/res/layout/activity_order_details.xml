@@ -143,12 +143,13 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view"
                         android:layout_width="match_parent"
+                        android:layout_marginTop="1dp"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_8"
+                        android:layout_marginTop="@dimen/space_4"
                         android:background="@color/white"
                         android:orientation="vertical">
 
@@ -188,8 +189,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginLeft="@dimen/space_12"
-                            android:background="@color/gray" />
+                            android:background="@color/windowBackground"/>
 
                         <RelativeLayout
                             android:layout_width="match_parent"

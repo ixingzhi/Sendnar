@@ -36,6 +36,7 @@ import com.shichuang.sendnar.entify.AMBaseDto;
 import com.shichuang.sendnar.entify.Address;
 import com.shichuang.sendnar.entify.Empty;
 import com.shichuang.sendnar.entify.OrderDetails;
+import com.shichuang.sendnar.entify.OrderReceiveAddress;
 import com.shichuang.sendnar.entify.RefundReturnGoodsReason;
 import com.shichuang.sendnar.entify.UploadFile;
 import com.shichuang.sendnar.event.UpdateOrderEvent;
@@ -59,8 +60,6 @@ import io.reactivex.functions.Consumer;
  */
 
 public class ApplyExchangeGoodsActivity extends BaseActivity implements View.OnClickListener {
-    private static final int SELECT_ADDRESS = 0x11;
-
     // 商品列表
     private RecyclerView mRecyclerView;
     private OrderDetailsAdapter mAdapter;
@@ -84,8 +83,6 @@ public class ApplyExchangeGoodsActivity extends BaseActivity implements View.OnC
     private List<RefundReturnGoodsReason.Reason> reasonList;
     // 上传成功之后的图片地址
     private List<String> uploadList = new ArrayList<>();
-    // 地址Id
-    private int addressId;
 
     @Override
     public int getLayoutId() {
@@ -124,7 +121,6 @@ public class ApplyExchangeGoodsActivity extends BaseActivity implements View.OnC
     @Override
     public void initEvent() {
         findViewById(R.id.ll_exchange_goods_reason).setOnClickListener(this);
-        findViewById(R.id.rl_delivery_address).setOnClickListener(this);
         findViewById(R.id.btn_commit).setOnClickListener(this);
         mEtExchangeGoodsInstructions.addTextChangedListener(new TextWatcher() {
             @Override
@@ -149,7 +145,9 @@ public class ApplyExchangeGoodsActivity extends BaseActivity implements View.OnC
             mTvGoodsName.setText(orderInfo.getSortName());
         }
         getRefundReturnGoodsReason();
+        getAddress();
     }
+
 
     @Override
     public void onClick(View v) {
@@ -171,11 +169,6 @@ public class ApplyExchangeGoodsActivity extends BaseActivity implements View.OnC
                     }
                 });
                 mDialog2.show();
-                break;
-            case R.id.rl_delivery_address:
-                Bundle bundle = new Bundle();
-                bundle.putInt("from", MyAddressActivity.CONFIRM_ORDER);
-                RxActivityTool.skipActivityForResult(ApplyExchangeGoodsActivity.this, MyAddressActivity.class, bundle, SELECT_ADDRESS);
                 break;
             case R.id.btn_commit:
                 checkInfo();
@@ -210,13 +203,7 @@ public class ApplyExchangeGoodsActivity extends BaseActivity implements View.OnC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SELECT_ADDRESS && resultCode == RESULT_OK) {
-            Address address = (Address) data.getSerializableExtra("address");
-            addressId = address.getId();
-            mTvConsignee.setText(address.getName());
-            mTvPhone.setText(address.getPhone());
-            mTvDetailsAddress.setText(address.getProvinceName() + address.getCityName() + address.getAreaName() + address.getAddress());
-        } else if (requestCode == PictureConfig.CHOOSE_REQUEST && resultCode == RESULT_OK) {
+        if (requestCode == PictureConfig.CHOOSE_REQUEST && resultCode == RESULT_OK) {
             switch (requestCode) {
                 case PictureConfig.CHOOSE_REQUEST:
                     // 图片选择结果回调
@@ -267,14 +254,47 @@ public class ApplyExchangeGoodsActivity extends BaseActivity implements View.OnC
                 });
     }
 
+    private void getAddress() {
+        OkGo.<AMBaseDto<OrderReceiveAddress>>get(Constants.getOrderReceiveAddressUrl)
+                .tag(mContext)
+                .params("order_detail_id", orderInfo.getOrderDetailId())
+                .execute(new NewsCallback<AMBaseDto<OrderReceiveAddress>>() {
+                    @Override
+                    public void onStart(Request<AMBaseDto<OrderReceiveAddress>, ? extends Request> request) {
+                        super.onStart(request);
+                    }
+
+                    @Override
+                    public void onSuccess(final Response<AMBaseDto<OrderReceiveAddress>> response) {
+                        if (response.body().code == 0 && response.body().data != null) {
+                            OrderReceiveAddress address = response.body().data;
+                            mTvConsignee.setText(address.getNickname());
+                            mTvPhone.setText(address.getPhone());
+                            mTvDetailsAddress.setText(address.getReceiveAddress());
+                        } else {
+                            showToast(response.body().msg);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<AMBaseDto<OrderReceiveAddress>> response) {
+                        super.onError(response);
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                    }
+                });
+    }
+
     private void checkInfo() {
         String exchangeGoodsReason = mTvExchangeGoodsReason.getText().toString().trim();
         String exchangeGoodsInstructions = mTvExchangeGoodsInstructionsCount.getText().toString().trim();
 
         if (TextUtils.isEmpty(exchangeGoodsReason)) {
             showToast("请选择换货原因");
-        } else if (addressId == 0) {
-            showToast("请选择收货地址");
         } else if (TextUtils.isEmpty(exchangeGoodsInstructions)) {
             showToast("请填写换货说明");
         } else if (exchangeGoodsInstructions.trim().length() < 5) {

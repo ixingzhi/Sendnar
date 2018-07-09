@@ -11,6 +11,7 @@ import com.shichuang.open.tool.RxBigDecimalTool;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.event.FinishActivityEvent;
 import com.shichuang.sendnar.event.MessageEvent;
+import com.shichuang.sendnar.widget.RxTitleBar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -22,6 +23,7 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 
 public class IncomeAmountActivity extends BaseActivity {
+    private RxTitleBar mTitleBar;
     private String withdrawalAmount;
 
     @Override
@@ -32,14 +34,22 @@ public class IncomeAmountActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         withdrawalAmount = getIntent().getStringExtra("withdrawalAmount");
+        mTitleBar = view.findViewById(R.id.title_bar);
         if (!TextUtils.isEmpty(withdrawalAmount)) {
             ((TextView) findViewById(R.id.tv_withdrawal_amount)).setText("¥" + RxBigDecimalTool.toDecimal(withdrawalAmount, 2));
         }
+
         EventBus.getDefault().register(mContext);
     }
 
     @Override
     public void initEvent() {
+        mTitleBar.setTitleBarClickListener(new RxTitleBar.TitleBarClickListener() {
+            @Override
+            public void onRightClick() {
+                RxActivityTool.skipActivity(mContext, WithdrawalRecordActivity.class);
+            }
+        });
         findViewById(R.id.btn_withdraw).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

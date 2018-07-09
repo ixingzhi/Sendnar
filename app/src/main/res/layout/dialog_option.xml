@@ -18,8 +18,19 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="240dp">
 
     </android.support.v7.widget.RecyclerView>
+
+
+    <TextView
+        android:id="@+id/tv_close"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_gradual_change_orange"
+        android:gravity="center"
+        android:text="关闭"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16" />
 
 </LinearLayout>

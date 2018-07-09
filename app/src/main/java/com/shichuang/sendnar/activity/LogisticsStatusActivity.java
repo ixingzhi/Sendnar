@@ -43,6 +43,9 @@ public class LogisticsStatusActivity extends BaseActivity {
     private LogisticsStatusAdapter mAdapter;
     private RxEmptyLayout mEmptyLayout;
 
+    // 我的订单，订单详情页面使用
+    private String orderId;
+    // 其他界面
     private String logisticsNo;
     private String logisticsCompany;
 
@@ -53,6 +56,7 @@ public class LogisticsStatusActivity extends BaseActivity {
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
+        orderId = getIntent().getStringExtra("orderId");
         logisticsNo = getIntent().getStringExtra("logisticsNo");
         logisticsCompany = getIntent().getStringExtra("logisticsCompany");
         mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.layout_logistics_status_header, (ViewGroup) findViewById(android.R.id.content), false);
@@ -86,6 +90,7 @@ public class LogisticsStatusActivity extends BaseActivity {
     private void getLogisticsData() {
         OkGo.<AMBaseDto<String>>get(Constants.getLogisticsMsgUrl)
                 .tag(mContext)
+                .params("order_id", orderId)
                 .params("express_no", logisticsNo)
                 .params("com", logisticsCompany)
                 .execute(new NewsCallback<AMBaseDto<String>>() {
@@ -102,15 +107,19 @@ public class LogisticsStatusActivity extends BaseActivity {
                             if (!TextUtils.isEmpty(info)) {
                                 LogisticsInformation logisticsInformation = Convert.fromJson(info, LogisticsInformation.class);
                                 if (logisticsInformation != null) {
-                                    handleData(logisticsInformation);
-                                    mEmptyLayout.hide();
-                                }else{
+                                    if (logisticsInformation.getData() != null && logisticsInformation.getData().size() > 0) {
+                                        handleData(logisticsInformation);
+                                        mEmptyLayout.hide();
+                                    } else {
+                                        mEmptyLayout.show(RxEmptyLayout.EMPTY_DATA);
+                                    }
+                                } else {
                                     mEmptyLayout.show(RxEmptyLayout.EMPTY_DATA);
                                 }
-                            }else{
+                            } else {
                                 mEmptyLayout.show(RxEmptyLayout.EMPTY_DATA);
                             }
-                        }else{
+                        } else {
                             showToast(response.body().msg);
                             mEmptyLayout.show(RxEmptyLayout.EMPTY_DATA);
                         }

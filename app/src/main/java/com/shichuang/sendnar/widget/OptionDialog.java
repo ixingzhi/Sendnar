@@ -35,6 +35,12 @@ public class OptionDialog extends BaseDialog {
 
     private void initView() {
         mTvTitle = view.findViewById(R.id.tv_title);
+        view.findViewById(R.id.tv_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
 
         RecyclerView mRvOption = view.findViewById(R.id.recycler_view);
         mRvOption.setLayoutManager(new LinearLayoutManager(mContext));
@@ -57,7 +63,7 @@ public class OptionDialog extends BaseDialog {
                     dismiss();
                     if (onOptionClickListener != null) {
                         onOptionClickListener.onClick(item, helper.getAdapterPosition());
-                    }else{
+                    } else {
 
                     }
                 }

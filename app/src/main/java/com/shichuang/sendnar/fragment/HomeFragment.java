@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.OkGo;
@@ -38,12 +39,16 @@ import com.shichuang.sendnar.activity.SearchActivity;
 import com.shichuang.sendnar.adapter.HomeAdapter;
 import com.shichuang.sendnar.common.Constants;
 import com.shichuang.sendnar.common.GiftsDetailsType;
+import com.shichuang.sendnar.common.MessageCountHelper;
 import com.shichuang.sendnar.common.NewsCallback;
 import com.shichuang.sendnar.common.SinglePage;
 import com.shichuang.sendnar.common.UdeskHelper;
 import com.shichuang.sendnar.common.Utils;
 import com.shichuang.sendnar.entify.AMBaseDto;
 import com.shichuang.sendnar.entify.Home;
+import com.shichuang.sendnar.entify.MessageCount;
+import com.shichuang.sendnar.event.MessageCountEvent;
+import com.shichuang.sendnar.event.UpdateShoppingCartCount;
 import com.shichuang.sendnar.interf.OnTabReselectListener;
 import com.shichuang.sendnar.tool.BannerImageLoader;
 import com.shichuang.sendnar.widget.VerticalSwipeRefreshLayout;
@@ -52,6 +57,11 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +75,7 @@ import cn.udesk.model.MsgNotice;
  */
 
 public class HomeFragment extends BaseFragment implements OnTabReselectListener {
+    private TextView mTvMessageCount;
     private RxEmptyLayout mEmptyLayout;
     private VerticalSwipeRefreshLayout mSwipeRefreshLayout;
     private Banner mBanner;
@@ -85,11 +96,13 @@ public class HomeFragment extends BaseFragment implements OnTabReselectListener 
         View mViewStatusBar = view.findViewById(R.id.view_status_bar);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mViewStatusBar.getLayoutParams();
         params.height = RxStatusBarTool.getStatusBarHeight(mContext);
+        mTvMessageCount = view.findViewById(R.id.tv_message_count);
         mEmptyLayout = view.findViewById(R.id.empty_layout);
         mSwipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.layout_banner, (ViewGroup) getActivity().findViewById(android.R.id.content), false);
         initBanner();
         initRecyclerView();
+        EventBus.getDefault().register(this);
     }
 
     private void initBanner() {
@@ -138,7 +151,7 @@ public class HomeFragment extends BaseFragment implements OnTabReselectListener 
                             RxActivityTool.skipActivity(mContext, GiftsDetailsActivity.class, bundle3);
                             break;
                         case 5:  // 单页
-                            SinglePage.getInstance().toPage(mContext, "公司简介", SinglePage.COMPANY_PROFILE, bannerData.getPicValueParameter());
+                            SinglePage.getInstance().toPage(mContext, "关于送哪儿", SinglePage.COMPANY_PROFILE, bannerData.getPicValueParameter());
                             break;
                         default:
                             break;
@@ -231,6 +244,7 @@ public class HomeFragment extends BaseFragment implements OnTabReselectListener 
     @Override
     public void initData() {
         refresh();
+        MessageCountHelper.getInstance().getCount(mContext);
     }
 
     private void refresh() {
@@ -292,5 +306,28 @@ public class HomeFragment extends BaseFragment implements OnTabReselectListener 
     public void onTabReselect() {
         mRecyclerView.scrollToPosition(0);
         refresh();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageCountEvent event) {
+        if (null != event) {
+            int count = event.count;
+            if (count > 0) {
+//                if (count > 99) {
+//                    mTvMessageCount.setText("99+");
+//                } else {
+//                    mTvMessageCount.setText(String.valueOf(count));
+//                }
+                mTvMessageCount.setVisibility(View.VISIBLE);
+            } else {
+                mTvMessageCount.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

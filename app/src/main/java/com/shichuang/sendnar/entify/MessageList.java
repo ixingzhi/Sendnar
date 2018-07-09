@@ -9,36 +9,43 @@ import java.util.List;
  */
 
 public class MessageList {
-    private List<MessageListModel> rows;
-    private int recordCount;
+    private int id;
+    private MessageListModel newMessage;
+    private boolean isOpenMessageContent;
 
-    public List<MessageListModel> getRows() {
-        return rows;
+    public int getId() {
+        return id;
     }
 
-    public void setRows(List<MessageListModel> rows) {
-        this.rows = rows;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getRecordCount() {
-        return recordCount;
+    public MessageListModel getNewMessage() {
+        return newMessage;
     }
 
-    public void setRecordCount(int recordCount) {
-        this.recordCount = recordCount;
+    public void setNewMessage(MessageListModel newMessage) {
+        this.newMessage = newMessage;
     }
 
-    public static class MessageListModel{
+    public boolean isOpenMessageContent() {
+        return isOpenMessageContent;
+    }
+
+    public void setOpenMessageContent(boolean openMessageContent) {
+        isOpenMessageContent = openMessageContent;
+    }
+
+    public static class MessageListModel {
         private int id;
         @SerializedName("message_title")
         private String messageTitle;
         @SerializedName("message_content")
         private String messageContent;
-        @SerializedName("add_time")
-        private String addTime;
-        @SerializedName("is_read")
-        private int isRead;
-        private boolean isOpenMessageContent;
+        @SerializedName("send_time")
+        private String sendTime;
+
 
         public int getId() {
             return id;
@@ -64,28 +71,12 @@ public class MessageList {
             this.messageContent = messageContent;
         }
 
-        public String getAddTime() {
-            return addTime;
+        public String getSendTime() {
+            return sendTime;
         }
 
-        public void setAddTime(String addTime) {
-            this.addTime = addTime;
-        }
-
-        public int getIsRead() {
-            return isRead;
-        }
-
-        public void setIsRead(int isRead) {
-            this.isRead = isRead;
-        }
-
-        public boolean isOpenMessageContent() {
-            return isOpenMessageContent;
-        }
-
-        public void setOpenMessageContent(boolean openMessageContent) {
-            isOpenMessageContent = openMessageContent;
+        public void setSendTime(String sendTime) {
+            this.sendTime = sendTime;
         }
     }
 }

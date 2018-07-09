@@ -278,11 +278,14 @@ public class RefundReturnGoodsActivity extends BaseActivity implements View.OnCl
             showToast("请选择货物状态");
         } else if (TextUtils.isEmpty(refundReason)) {
             showToast("请选择退款原因");
-        } else if (TextUtils.isEmpty(refundInstructions)) {
-            showToast("请填写退款说明");
-        } else if (refundInstructions.trim().length() < 5) {
-            showToast("退款说明不能小于5个字符");
-        } else {
+        }
+//        else if (TextUtils.isEmpty(refundInstructions)) {
+//            showToast("请填写退款说明");
+//        }
+//        else if (refundInstructions.trim().length() < 5) {
+//            showToast("退款说明不能小于5个字符");
+//        }
+        else {
             // 如果选择了图片，先上传图片
             showLoading();
             if (selectList.size() > 0) {

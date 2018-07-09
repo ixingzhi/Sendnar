@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -30,10 +33,12 @@ import com.shichuang.sendnar.entify.EarningsInformationThisMonth;
 import com.shichuang.sendnar.entify.Empty;
 import com.shichuang.sendnar.event.MessageEvent;
 import com.shichuang.sendnar.widget.PromptDialog;
+import com.shichuang.sendnar.widget.RxTitleBar;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +47,8 @@ import java.util.List;
  */
 
 public class CharityContributionActivity extends BaseActivity {
+    private RxTitleBar mTitleBar;
+    private TextView mTvConsumptionSort;
     private RxEmptyLayout mEmptyLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -54,6 +61,7 @@ public class CharityContributionActivity extends BaseActivity {
     private int pageSize = 10;
     private int pageIndex = 1;
     private EarningsInformationThisMonth mThisMonthAmountData;
+    private int sortType = 0;
 
     @Override
     public int getLayoutId() {
@@ -63,6 +71,8 @@ public class CharityContributionActivity extends BaseActivity {
     @Override
     public void initView(Bundle savedInstanceState, View view) {
         actionType = getIntent().getIntExtra("actionType", 0);
+        mTitleBar = view.findViewById(R.id.title_bar);
+        mTvConsumptionSort = view.findViewById(R.id.tv_consumption_sort);
         mEmptyLayout = (RxEmptyLayout) findViewById(R.id.empty_layout);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         initRecyclerView();
@@ -84,9 +94,9 @@ public class CharityContributionActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-        findViewById(R.id.iv_query).setOnClickListener(new View.OnClickListener() {
+        mTitleBar.setTitleBarClickListener(new RxTitleBar.TitleBarClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onRightClick() {
                 if (mThisMonthAmountData != null) {
                     SimpleDateFormat fromSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     SimpleDateFormat toSimpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
@@ -101,6 +111,13 @@ public class CharityContributionActivity extends BaseActivity {
                     PromptDialog mDialog = new PromptDialog(mContext, view);
                     mDialog.show();
                 }
+            }
+        });
+        // 消费排序
+        mTvConsumptionSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectSortWay();
             }
         });
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -154,6 +171,7 @@ public class CharityContributionActivity extends BaseActivity {
                 .params("action_type", actionType)   // 1  是合伙人查所有消费者给我的收益 2  是发起人查所有合伙人给我的收益  3   是发起人查所有消费者给我的收益
                 .params("pageSize", pageSize)
                 .params("pageIndex", pageIndex)
+                .params("sort_type", sortType)   // 1 是消费排序 ||2 是时间排序
                 .execute(new NewsCallback<AMBaseDto<CharityContribution>>() {
                     @Override
                     public void onStart(Request<AMBaseDto<CharityContribution>, ? extends Request> request) {
@@ -293,5 +311,25 @@ public class CharityContributionActivity extends BaseActivity {
                 });
     }
 
+
+    private void selectSortWay() {
+        final List<String> options2Items = new ArrayList<>();
+        options2Items.add("时间");
+        options2Items.add("金额");
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                if (options2Items.get(option2).equals("时间")) {
+                    sortType = 2;
+                } else {
+                    sortType = 1;
+                }
+                refresh();
+            }
+        }).build();
+        pvOptions.setPicker(options2Items);
+        pvOptions.show();
+    }
 
 }

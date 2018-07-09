@@ -107,8 +107,8 @@ public class SearchResultActivity extends BaseActivity {
                 //.params("type_id", typeId)
                 .params("pageSize", pageSize)
                 .params("pageIndex", pageIndex)
-                .params("festival_id", giftObjectId)   // 送礼对象
-                .params("goods_category_id", "")
+                //.params("festival_id", giftObjectId)   // 送礼对象
+                .params("goods_category_id", null)
                 .params("Keyword", content)
                 .execute(new NewsCallback<AMBaseDto<GoodsList>>() {
                     @Override

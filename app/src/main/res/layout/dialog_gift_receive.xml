@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_gift_receive"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/space_16"
+            android:text="温馨提示"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/space_16"
+            android:paddingLeft="@dimen/space_16"
+            android:paddingRight="@dimen/space_16"
+            android:text="此物品未接收，将永不过期、永不作废；待到您需要或转赠时，接收并填写地址，我们将为您安排发货；特定或非当季商品，您可按同等价值换货哦～"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="240dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/windowBackground" />
+
+    <TextView
+        android:id="@+id/tv_i_know"
+        android:layout_width="260dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_i_know_click_color"
+        android:gravity="center"
+        android:text="我知道了"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_16" />
+
+</LinearLayout>

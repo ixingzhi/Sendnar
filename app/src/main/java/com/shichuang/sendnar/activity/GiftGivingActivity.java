@@ -27,8 +27,10 @@ import com.shichuang.sendnar.common.UserCache;
 import com.shichuang.sendnar.common.Utils;
 import com.shichuang.sendnar.entify.AMBaseDto;
 import com.shichuang.sendnar.entify.Empty;
+import com.shichuang.sendnar.entify.ExchangeGift;
 import com.shichuang.sendnar.entify.FestivalList;
 import com.shichuang.sendnar.entify.LookGiftInfo;
+import com.shichuang.sendnar.widget.GiftReceiveDialog;
 import com.shichuang.sendnar.widget.RxTitleBar;
 import com.shichuang.sendnar.widget.ShareDialog;
 import com.umeng.socialize.UMShareAPI;
@@ -70,7 +72,7 @@ public class GiftGivingActivity extends BaseActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText("待接收"));
         mTabLayout.addTab(mTabLayout.newTab().setText("已超时"));
         mTabLayout.addTab(mTabLayout.newTab().setText("已接收"));
-        RxTabLayoutTool.setIndicator(mContext,mTabLayout,24,24);
+        RxTabLayoutTool.setIndicator(mContext, mTabLayout, 24, 24);
 
         mEmptyLayout = (RxEmptyLayout) findViewById(R.id.empty_layout);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
@@ -130,8 +132,17 @@ public class GiftGivingActivity extends BaseActivity {
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                LookGiftInfo.LookGiftInfoModel item = mAdapter.getItem(position);
+                final LookGiftInfo.LookGiftInfoModel item = mAdapter.getItem(position);
                 switch (view.getId()) {
+                    case R.id.btn_exchange_gift:
+                        ExchangeGift exchangeGift = new ExchangeGift();
+                        exchangeGift.setId(item.getId());
+                        exchangeGift.setReceiveGiftId(item.getReceiveGiftId());
+
+                        Bundle bundle3 = new Bundle();
+                        bundle3.putSerializable("exchangeGift", exchangeGift);
+                        RxActivityTool.skipActivity(mContext, ClassifyActivity.class, bundle3);
+                        break;
                     case R.id.btn_gather_together_red_packet:
                         Bundle bundle = new Bundle();
                         bundle.putInt("gatherTogetherRedPacketId", item.getReceiveGiftId());
@@ -139,7 +150,7 @@ public class GiftGivingActivity extends BaseActivity {
                         break;
                     case R.id.btn_examples_of:
                         Bundle bundle1 = new Bundle();
-                        bundle1.putString("ids", item.getId()+"");
+                        bundle1.putString("ids", item.getId() + "");
                         bundle1.putString("description", item.getShopName());
                         bundle1.putString("imgShareUrl", Utils.getSingleImageUrlByImageUrls(item.getPic()));
                         bundle1.putBoolean("isExamples", true);
@@ -147,10 +158,17 @@ public class GiftGivingActivity extends BaseActivity {
                         RxActivityTool.skipActivityForResult(GiftGivingActivity.this, GreetingsActivity.class, bundle1, EXAMPLES_GIFT);
                         break;
                     case R.id.btn_receive:
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putInt("goodsId", item.getGoodsId());
-                        bundle2.putInt("giftOrderId", item.getId());
-                        RxActivityTool.skipActivityForResult(GiftGivingActivity.this, GiftReceivedConfirmOrderActivity.class, bundle2, RECEIVE_GIFT);
+                        GiftReceiveDialog mDialog = new GiftReceiveDialog(mContext);
+                        mDialog.setOnClickListener(new GiftReceiveDialog.OnClickListener() {
+                            @Override
+                            public void onClick() {
+                                Bundle bundle2 = new Bundle();
+                                bundle2.putInt("goodsId", item.getGoodsId());
+                                bundle2.putInt("giftOrderId", item.getId());
+                                RxActivityTool.skipActivityForResult(GiftGivingActivity.this, GiftReceivedConfirmOrderActivity.class, bundle2, RECEIVE_GIFT);
+                            }
+                        });
+                        mDialog.show();
                         break;
                 }
             }
@@ -266,7 +284,7 @@ public class GiftGivingActivity extends BaseActivity {
      * 分享
      */
     private void share(int redPacketId, String greetings, String description, String imgShareUrl, int type) {
-        String url = Constants.MAIN_ENGINE_PIC + "/songnaerWechat/#/redenvelopes?id=" + redPacketId + "&type=" + type+ "&user=" + TokenCache.userId(mContext);
+        String url = Constants.MAIN_ENGINE_PIC + "/songnaerWechat/#/redenvelopes?id=" + redPacketId + "&type=" + type + "&user=" + TokenCache.userId(mContext);
         String title = UserCache.user(mContext).getNickname() + "祝您" + greetings;
 
         final ShareDialog mDialog = new ShareDialog(GiftGivingActivity.this);

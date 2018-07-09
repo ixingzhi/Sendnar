@@ -21,4 +21,8 @@ public class BuyType {
      * 购物车送给自己
      */
     public final static int SHOPPING_CART_BUY_NOW = 0x14;
+    /**
+     * 换礼物
+     */
+    public final static int EXCHANGE_GIFT = 0x15;
 }

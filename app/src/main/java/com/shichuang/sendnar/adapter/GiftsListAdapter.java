@@ -12,8 +12,10 @@ import com.shichuang.open.tool.RxBigDecimalTool;
 import com.shichuang.open.tool.RxGlideTool;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.activity.ConfirmOrderActivity;
+import com.shichuang.sendnar.activity.ExchangeGiftConfirmOrderActivity;
 import com.shichuang.sendnar.common.BuyType;
 import com.shichuang.sendnar.common.Utils;
+import com.shichuang.sendnar.entify.ExchangeGift;
 import com.shichuang.sendnar.entify.GoodsList;
 
 /**
@@ -21,6 +23,8 @@ import com.shichuang.sendnar.entify.GoodsList;
  */
 
 public class GiftsListAdapter extends BaseQuickAdapter<GoodsList.GoodsListModel, BaseViewHolder> {
+    private ExchangeGift exchangeGift;
+
     public GiftsListAdapter() {
         super(R.layout.item_gifts_list);
     }
@@ -30,14 +34,23 @@ public class GiftsListAdapter extends BaseQuickAdapter<GoodsList.GoodsListModel,
         RxGlideTool.loadImageView(mContext, Utils.getSingleImageUrlByImageUrls(item.getPic()), (ImageView) helper.getView(R.id.iv_picture), R.drawable.ic_gift_default_square);
         helper.setText(R.id.tv_gifts_name, item.getShopName());
         helper.setText(R.id.tv_gifts_description, item.getLabels());
-//        // 活动价
-//        if(!TextUtils.isEmpty(item.getPromotionPrice())){
-//            helper.setText(R.id.tv_gifts_price, "¥" + RxBigDecimalTool.toDecimal(item.getPromotionPrice(), 2));
-//        }else{
-//            helper.setText(R.id.tv_gifts_price, "¥" + RxBigDecimalTool.toDecimal(item.getSalePrice(), 2));
-//        }
-        helper.setText(R.id.tv_gifts_price, "¥" + RxBigDecimalTool.toDecimal(item.getSalePrice(), 2));
+        // 活动价
+        if (!TextUtils.isEmpty(item.getPromotionPrice())) {
+            helper.setText(R.id.tv_gifts_price, "¥" + RxBigDecimalTool.toDecimal(item.getPromotionPrice(), 2));
+        } else {
+            helper.setText(R.id.tv_gifts_price, "¥" + RxBigDecimalTool.toDecimal(item.getSalePrice(), 2));
+        }
+        //helper.setText(R.id.tv_gifts_price, "¥" + RxBigDecimalTool.toDecimal(item.getSalePrice(), 2));
         helper.addOnClickListener(R.id.iv_add_shopping_cart);
+        // 如果是换礼物，则隐藏 微信送礼，送给自己，加入购物车
+        if (exchangeGift != null) {
+            helper.getView(R.id.btn_wechat_gift_giving).setVisibility(View.GONE);
+            helper.getView(R.id.btn_direct_purchasing).setVisibility(View.GONE);
+            helper.getView(R.id.iv_add_shopping_cart).setVisibility(View.GONE);
+            helper.getView(R.id.btn_exchange_gift).setVisibility(View.VISIBLE);
+        }
+
+
         // 微信送礼
         helper.getView(R.id.btn_wechat_gift_giving).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,5 +75,27 @@ public class GiftsListAdapter extends BaseQuickAdapter<GoodsList.GoodsListModel,
                 }
             }
         });
+        // 换礼物
+        helper.getView(R.id.btn_exchange_gift).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Utils.isLogin(mContext)) {
+                    exchangeGift.setGoodIdNew(item.getId());
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("exchangeGift", exchangeGift);
+                    bundle.putInt("buyType", BuyType.EXCHANGE_GIFT);
+                    RxActivityTool.skipActivity(mContext, ExchangeGiftConfirmOrderActivity.class, bundle);
+
+                }
+            }
+        });
+    }
+
+    /**
+     * 是否换礼物
+     */
+    public void setExchangeGift(ExchangeGift data) {
+        this.exchangeGift = data;
     }
 }

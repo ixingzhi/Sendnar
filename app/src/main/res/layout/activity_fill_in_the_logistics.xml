@@ -40,7 +40,7 @@
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:src="@drawable/ic_arrows_down_gray" />
+            android:src="@drawable/ic_arrows_right_gray" />
 
     </LinearLayout>
 
@@ -63,7 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/space_12"
-        android:text="联系方式" />
+        android:text="联系方式"
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/et_contact_information"
@@ -72,7 +73,8 @@
         android:background="@color/white"
         android:padding="@dimen/space_12"
         android:textColor="@color/orange"
-        android:textSize="@dimen/text_size_15" />
+        android:textSize="@dimen/text_size_15"
+        android:visibility="gone"/>
 
     <Space
         android:layout_width="0dp"

@@ -19,7 +19,7 @@ public class MyOrder implements MultiItemEntity {
     private int orderPosition;
     private List<OrderInfo> rows;
 
-    public MyOrder(){
+    public MyOrder() {
 
     }
 
@@ -67,11 +67,13 @@ public class MyOrder implements MultiItemEntity {
         @SerializedName("order_no")
         private String orderNo;
         @SerializedName("shop_goods_order_detailModellist")
-        private List<GoodsInfo>  goodsInfoList;
+        private List<GoodsInfo> goodsInfoList;
         @SerializedName("order_amount_total")
         private String orderAmountTotal;
         @SerializedName("actual_amount")
         private String actualAmount;
+        @SerializedName("is_exchangeOrder")
+        private int isExchangeOrder;  // 1是换礼物订单 2不是 如果是 走到换礼订单
         private int goodsPosition;  // 标识商品的位置
 
         public int getId() {
@@ -120,6 +122,14 @@ public class MyOrder implements MultiItemEntity {
 
         public void setActualAmount(String actualAmount) {
             this.actualAmount = actualAmount;
+        }
+
+        public int getIsExchangeOrder() {
+            return isExchangeOrder;
+        }
+
+        public void setIsExchangeOrder(int isExchangeOrder) {
+            this.isExchangeOrder = isExchangeOrder;
         }
 
         public int getGoodsPosition() {

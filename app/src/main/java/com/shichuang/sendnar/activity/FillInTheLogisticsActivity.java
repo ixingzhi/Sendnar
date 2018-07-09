@@ -34,7 +34,7 @@ import java.util.List;
 
 public class FillInTheLogisticsActivity extends BaseActivity {
     private EditText mEtLogisticsNo;
-    private EditText mEtContactInformation;
+    //private EditText mEtContactInformation;
     private TextView mTvExpressMode;
 
     private List<LogisticsCompany> logisticsCompanyList;
@@ -51,7 +51,7 @@ public class FillInTheLogisticsActivity extends BaseActivity {
     public void initView(Bundle savedInstanceState, View view) {
         orderDetailId = getIntent().getIntExtra("orderDetailId", 0);
         mEtLogisticsNo = view.findViewById(R.id.et_logistics_no);
-        mEtContactInformation = view.findViewById(R.id.et_contact_information);
+        //mEtContactInformation = view.findViewById(R.id.et_contact_information);
         mTvExpressMode = view.findViewById(R.id.tv_express_mode);
     }
 
@@ -126,20 +126,22 @@ public class FillInTheLogisticsActivity extends BaseActivity {
 
     private void checkInfo() {
         String logisticsNo = mEtLogisticsNo.getText().toString();
-        String contactInformation = mEtContactInformation.getText().toString();
+        //String contactInformation = mEtContactInformation.getText().toString();
 
         if (TextUtils.isEmpty(logisticsCompanyName)) {
             showToast("请选择快递方式");
         } else if (TextUtils.isEmpty(logisticsNo)) {
             showToast("请填写物流单号");
-        } else if (TextUtils.isEmpty(contactInformation)) {
-            showToast("请填写联系方式");
-        } else {
-            commit(logisticsNo, contactInformation);
+        }
+//        else if (TextUtils.isEmpty(contactInformation)) {
+//            showToast("请填写联系方式");
+//        }
+        else {
+            commit(logisticsNo);
         }
     }
 
-    private void commit(String logisticsNo, String contactInformation) {
+    private void commit(String logisticsNo) {
         OkGo.<AMBaseDto<Empty>>post(Constants.fillInTheLogisticsUrl)
                 .tag(mContext)
                 .params("token", TokenCache.token(mContext))

@@ -80,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_handle_time"
                 android:layout_width="match_parent"
@@ -276,6 +277,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_platform_delivery_time"
                 android:layout_width="match_parent"
@@ -347,6 +349,17 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btn_buyers_confirm_goods"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_marginRight="@dimen/space_10"
+                android:layout_marginTop="@dimen/space_8"
+                android:background="@drawable/ic_btn_gradual_change_orange"
+                android:text="确认收货"
+                android:textColor="@color/white" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -354,6 +367,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_buyer_time_of_receipt"
                 android:layout_width="match_parent"

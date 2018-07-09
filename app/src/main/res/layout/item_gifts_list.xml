@@ -114,6 +114,16 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_12" />
 
+            <Button
+                android:id="@+id/btn_exchange_gift"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_gradual_change_orange"
+                android:text="换礼物"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12"
+                android:visibility="gone" />
+
         </LinearLayout>
     </RelativeLayout>
 

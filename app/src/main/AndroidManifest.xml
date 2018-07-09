@@ -45,6 +45,7 @@
         android:theme="@style/BaseTheme">
         <activity
             android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -183,8 +184,7 @@
         <activity
             android:name=".activity.MyIntegralActivity"
             android:label="我的积分"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyIntegralTheme" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.IntegralGuideActivity"
             android:label="积分指南"
@@ -266,6 +266,18 @@
         <activity
             android:name=".activity.MyItemsToSendMeConfirmOrderActivity"
             android:label="我的物品、送给自己"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ClassifyActivity"
+            android:label="分类"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ExchangeGiftConfirmOrderActivity"
+            android:label="换礼物确认订单"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ExchangeGiftOrderDetailsActivity"
+            android:label="换礼物订单详情"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LogoutDialogActivity"

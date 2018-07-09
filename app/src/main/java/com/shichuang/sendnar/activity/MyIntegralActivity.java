@@ -40,7 +40,7 @@ import org.greenrobot.eventbus.EventBus;
  */
 
 public class MyIntegralActivity extends BaseActivity {
-    private RelativeLayout mRlTitleBar;
+    //private RelativeLayout mRlTitleBar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private TextView mTvPoint;
     private RecyclerView mRecyclerView;
@@ -52,15 +52,15 @@ public class MyIntegralActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        RxStatusBarTool.setStatusBarLightMode(this, true);
+        //RxStatusBarTool.setStatusBarLightMode(this, true);
         return R.layout.activity_my_integral;
     }
 
     @Override
     public void initView(Bundle savedInstanceState, View view) {
-        mRlTitleBar = (RelativeLayout) findViewById(R.id.rl_title_bar);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mRlTitleBar.getLayoutParams();
-        params.setMargins(0, RxStatusBarTool.getStatusBarHeight(mContext), 0, 0);
+//        mRlTitleBar = (RelativeLayout) findViewById(R.id.rl_title_bar);
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mRlTitleBar.getLayoutParams();
+//        params.setMargins(0, RxStatusBarTool.getStatusBarHeight(mContext), 0, 0);
         initRecyclerView();
     }
 

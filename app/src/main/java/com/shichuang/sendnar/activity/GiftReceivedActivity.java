@@ -30,7 +30,9 @@ import com.shichuang.sendnar.common.UserCache;
 import com.shichuang.sendnar.common.Utils;
 import com.shichuang.sendnar.entify.AMBaseDto;
 import com.shichuang.sendnar.entify.Empty;
+import com.shichuang.sendnar.entify.ExchangeGift;
 import com.shichuang.sendnar.entify.LookGiftInfo;
+import com.shichuang.sendnar.widget.GiftReceiveDialog;
 import com.shichuang.sendnar.widget.GiftsReceiveRemindDialog;
 import com.shichuang.sendnar.widget.MyItemsRemindDialog;
 import com.shichuang.sendnar.widget.RxTitleBar;
@@ -138,8 +140,17 @@ public class GiftReceivedActivity extends BaseActivity {
         mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                LookGiftInfo.LookGiftInfoModel item = mAdapter.getItem(position);
+                final LookGiftInfo.LookGiftInfoModel item = mAdapter.getItem(position);
                 switch (view.getId()) {
+                    case R.id.btn_exchange_gift:
+                        ExchangeGift exchangeGift = new ExchangeGift();
+                        exchangeGift.setId(item.getId());
+                        exchangeGift.setReceiveGiftId(item.getReceiveGiftId());
+
+                        Bundle bundle3 = new Bundle();
+                        bundle3.putSerializable("exchangeGift", exchangeGift);
+                        RxActivityTool.skipActivity(mContext, ClassifyActivity.class, bundle3);
+                        break;
                     case R.id.btn_gather_together_red_packet:
                         Bundle bundle = new Bundle();
                         bundle.putInt("gatherTogetherRedPacketId", item.getReceiveGiftId());
@@ -155,10 +166,18 @@ public class GiftReceivedActivity extends BaseActivity {
                         RxActivityTool.skipActivityForResult(GiftReceivedActivity.this, GreetingsActivity.class, bundle1, EXAMPLES_GIFT);
                         break;
                     case R.id.btn_receive:
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putInt("goodsId", item.getGoodsId());
-                        bundle2.putInt("giftOrderId", item.getId());
-                        RxActivityTool.skipActivityForResult(GiftReceivedActivity.this, GiftReceivedConfirmOrderActivity.class, bundle2, RECEIVE_GIFT);
+                        // 显示接收弹窗
+                        GiftReceiveDialog mDialog = new GiftReceiveDialog(mContext);
+                        mDialog.setOnClickListener(new GiftReceiveDialog.OnClickListener() {
+                            @Override
+                            public void onClick() {
+                                Bundle bundle2 = new Bundle();
+                                bundle2.putInt("goodsId", item.getGoodsId());
+                                bundle2.putInt("giftOrderId", item.getId());
+                                RxActivityTool.skipActivityForResult(GiftReceivedActivity.this, GiftReceivedConfirmOrderActivity.class, bundle2, RECEIVE_GIFT);
+                            }
+                        });
+                        mDialog.show();
                         break;
                 }
             }

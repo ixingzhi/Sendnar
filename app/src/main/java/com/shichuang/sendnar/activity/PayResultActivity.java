@@ -79,7 +79,7 @@ public class PayResultActivity extends BaseActivity implements View.OnClickListe
         }
 
         // 如果是微信送礼，直接跳转我的物品
-        if (buyType == BuyType.WECHAT_GIFT_GIVING || buyType == BuyType.SHOPPING_CART_WECHAT_GIFT_GIVING) {
+        if (buyType == BuyType.WECHAT_GIFT_GIVING || buyType == BuyType.SHOPPING_CART_WECHAT_GIFT_GIVING || buyType == BuyType.EXCHANGE_GIFT) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

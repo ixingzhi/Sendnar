@@ -4,25 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:orientation="horizontal">
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_receive_remind" />
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_point_arrow_up_right" />
-
-        <ImageView
-            android:id="@+id/btn_receive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_gift_receive_remind"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="40dp"
+        android:src="@drawable/ic_point_arrow_up_right" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,11 +24,54 @@
         android:paddingLeft="40dp"
         android:paddingRight="40dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="换礼物："
+            android:textColor="@color/red"
+            android:layout_marginTop="@dimen/space_12"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="您的礼物订单信息，请转至【我的订单】，在【待发货】或【待收货】中查看~"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="您可将已接受的礼物，在平台上更换您需要和喜欢的礼物，礼物可以自己收取或继续转赠其他好友喔～换礼物将收取您10%换货手续费哟～"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="凑红包："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_12"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="您收到的礼物，在【我的物品】中，可以【凑红包】，转发至微信群或转赠微信好友～"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="接收："
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_12"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="此物品永不过期、永不作废；待到您需要或转赠他人时，接收并填写地址，我们才会安排供货商为您发货；您还可换货哦~"
             android:textColor="@color/white"
             android:textStyle="bold" />
 

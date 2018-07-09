@@ -93,7 +93,8 @@
                     android:background="@drawable/bg_white_stroke_red_orange_radius_4dp"
                     android:text="转赠详情"
                     android:textColor="@color/redOrange"
-                    android:textSize="@dimen/text_size_14" />
+                    android:textSize="@dimen/text_size_14"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 
@@ -113,9 +114,21 @@
                 android:paddingLeft="@dimen/space_12"
                 android:paddingRight="@dimen/space_12">
 
+
+                <Button
+                    android:id="@+id/btn_exchange_gift"
+                    android:layout_width="65dp"
+                    android:layout_height="32dp"
+                    android:textColor="@color/redOrange"
+                    android:layout_marginTop="@dimen/space_8"
+                    android:layout_marginBottom="@dimen/space_8"
+                    android:layout_marginLeft="@dimen/space_12"
+                    android:background="@drawable/bg_white_stroke_red_orange_radius_16dp"
+                    android:text="换礼物" />
+
                 <Button
                     android:id="@+id/btn_examples_of"
-                    android:layout_width="80dp"
+                    android:layout_width="65dp"
                     android:layout_height="32dp"
                     android:layout_marginBottom="@dimen/space_8"
                     android:layout_marginLeft="@dimen/space_12"
@@ -126,7 +139,7 @@
 
                 <Button
                     android:id="@+id/btn_gather_together_red_packet"
-                    android:layout_width="80dp"
+                    android:layout_width="65dp"
                     android:layout_height="32dp"
                     android:layout_marginBottom="@dimen/space_8"
                     android:layout_marginLeft="@dimen/space_12"
@@ -137,7 +150,7 @@
 
                 <Button
                     android:id="@+id/btn_receive"
-                    android:layout_width="80dp"
+                    android:layout_width="65dp"
                     android:layout_height="32dp"
                     android:layout_marginBottom="@dimen/space_8"
                     android:layout_marginLeft="@dimen/space_12"

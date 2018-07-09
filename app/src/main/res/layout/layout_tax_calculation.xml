@@ -23,7 +23,9 @@
         android:text="代扣个人所得税及相关手续费：6.8%"
         android:textColor="@color/black" />
 
+
     <TextView
+        android:id="@+id/tv_tax_rate_example"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_16"

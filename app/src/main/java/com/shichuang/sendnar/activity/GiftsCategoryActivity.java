@@ -23,20 +23,25 @@ import com.lzy.okgo.request.base.Request;
 import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.tool.RxActivityTool;
 import com.shichuang.open.tool.RxScreenTool;
+import com.shichuang.open.widget.RxEmptyLayout;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.adapter.GiftsListAdapter;
 import com.shichuang.sendnar.common.Constants;
 import com.shichuang.sendnar.common.GiftsDetailsType;
 import com.shichuang.sendnar.common.NewsCallback;
+import com.shichuang.sendnar.common.SinglePage;
 import com.shichuang.sendnar.common.TokenCache;
 import com.shichuang.sendnar.common.Utils;
 import com.shichuang.sendnar.entify.AMBaseDto;
 import com.shichuang.sendnar.entify.Empty;
+import com.shichuang.sendnar.entify.ExchangeGift;
 import com.shichuang.sendnar.entify.GoodsList;
 import com.shichuang.sendnar.entify.FestivalBannerAndGiftBag;
 import com.shichuang.sendnar.entify.GiftsCategoryType1;
+import com.shichuang.sendnar.entify.Home;
 import com.shichuang.sendnar.event.UpdateShoppingCart;
 import com.shichuang.sendnar.tool.BannerImageLoader;
+import com.shichuang.sendnar.widget.RxTitleBar;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -53,6 +58,7 @@ import java.util.List;
  */
 
 public class GiftsCategoryActivity extends BaseActivity {
+    private RxTitleBar mTitleBar;
     private TabLayout mTabLayout;
     private Banner mBanner;
     private EditText mEtGoodsSearch;
@@ -72,7 +78,10 @@ public class GiftsCategoryActivity extends BaseActivity {
     private int priceTypeId;
     // 送礼对象ID
     private int giftObjectId;
-
+    // 是不是转赠商品
+    private ExchangeGift exchangeGift;
+    // Banner数据
+    private List<Home.Banner> mBannerDataList;
 
     @Override
     public int getLayoutId() {
@@ -84,19 +93,29 @@ public class GiftsCategoryActivity extends BaseActivity {
         typeId = getIntent().getIntExtra("typeId", 0);
         priceTypeId = getIntent().getIntExtra("priceTypeId", 0);
         giftObjectId = getIntent().getIntExtra("giftObjectId", 0);
+        exchangeGift = (ExchangeGift) getIntent().getSerializableExtra("exchangeGift");
+        mBannerDataList = (List<Home.Banner>) getIntent().getSerializableExtra("bannerData");
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
+        mTitleBar = view.findViewById(R.id.title_bar);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         mHeaderView = LayoutInflater.from(mContext).inflate(R.layout.layout_gifts_category_header, (ViewGroup) findViewById(android.R.id.content), false);
         mEtGoodsSearch = mHeaderView.findViewById(R.id.et_goods_search);
         initBanner();
         initRecyclerView();
+
+        if (typeId == 13) {
+            mTitleBar.setTitle("专区");
+        } else {
+            mTitleBar.setTitle("礼品");
+        }
     }
 
     private void initRecyclerView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         mAdapter = new GiftsListAdapter();
+        mAdapter.setExchangeGift(exchangeGift);
         mAdapter.setPreLoadNumber(2);
         mAdapter.addHeaderView(mHeaderView);
         mRecyclerView.setAdapter(mAdapter);
@@ -119,6 +138,41 @@ public class GiftsCategoryActivity extends BaseActivity {
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
+                if (mBannerDataList != null && mBannerDataList.size() > 0) {
+                    Home.Banner bannerData = mBannerDataList.get(position);
+                    switch (bannerData.getPicValueType()) {
+                        case 2:  // 商品id
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("id", Integer.valueOf(bannerData.getPicValueParameter()));
+                            bundle.putInt("operationType", GiftsDetailsType.GOODS_DETAILS);
+                            RxActivityTool.skipActivity(mContext, GiftsDetailsActivity.class, bundle);
+                            break;
+                        case 3:  // 活动id
+                            if (bannerData.getTypeId() == 11) { // 扶贫
+                                Bundle bundle1 = new Bundle();
+                                bundle1.putInt("id", Integer.valueOf(bannerData.getPicValueParameter()));
+                                bundle1.putBoolean("isEnd", false);
+                                RxActivityTool.skipActivity(mContext, PovertyAlleviationActivitiesDetailsActivity.class, bundle1);
+                            } else if (bannerData.getTypeId() == 12) { // 节日
+                                Bundle bundle2 = new Bundle();
+                                //bundle2.putInt("actionId", Integer.valueOf(bannerData.getPicValueParameter()));
+                                bundle2.putInt("typeId", bannerData.getTypeId());
+                                RxActivityTool.skipActivity(mContext, FestivalActivity.class, bundle2);
+                            }
+                            break;
+                        case 4:  // 礼包id
+                            Bundle bundle3 = new Bundle();
+                            bundle3.putInt("id", Integer.valueOf(bannerData.getPicValueParameter()));
+                            bundle3.putInt("operationType", GiftsDetailsType.GIFT_BAG_DETAILS);
+                            RxActivityTool.skipActivity(mContext, GiftsDetailsActivity.class, bundle3);
+                            break;
+                        case 5:  // 单页
+                            SinglePage.getInstance().toPage(mContext, "关于送哪儿", SinglePage.COMPANY_PROFILE, bannerData.getPicValueParameter());
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         });
         // 设置比例尺寸 300 * 750
@@ -142,6 +196,7 @@ public class GiftsCategoryActivity extends BaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", mAdapter.getData().get(position).getId());
                 bundle.putInt("operationType", GiftsDetailsType.GOODS_DETAILS);
+                bundle.putSerializable("exchangeGift", exchangeGift);
                 RxActivityTool.skipActivity(mContext, GiftsDetailsActivity.class, bundle);
             }
         });
@@ -201,7 +256,44 @@ public class GiftsCategoryActivity extends BaseActivity {
         // 获取分类成功后获取商品列表
         getCategory();
         // 获取banner和礼包数据
-        getBannerAndGiftBagData();
+        //getBannerAndGiftBagData();
+        getBannerData();
+    }
+
+    private void getBannerData() {
+        OkGo.<AMBaseDto<Home>>get(Constants.homeUrl)
+                .tag(mContext)
+                .execute(new NewsCallback<AMBaseDto<Home>>() {
+                    @Override
+                    public void onStart(Request<AMBaseDto<Home>, ? extends Request> request) {
+                        super.onStart(request);
+                    }
+
+                    @Override
+                    public void onSuccess(final Response<AMBaseDto<Home>> response) {
+                        if (response.body().code == 0 && response.body().data != null) {
+                            Home home = response.body().data;
+                            if (home.getCarouselpics() != null) {
+                                mBannerDataList = home.getCarouselpics();
+                                List<String> bannerUrlList = new ArrayList<>();
+                                for (Home.Banner model : mBannerDataList) {
+                                    bannerUrlList.add(Constants.MAIN_ENGINE_PIC + model.getPic());
+                                }
+                                mBanner.update(bannerUrlList);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<AMBaseDto<Home>> response) {
+                        super.onError(response);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                    }
+                });
     }
 
     /**

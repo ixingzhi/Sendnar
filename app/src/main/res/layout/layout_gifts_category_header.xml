@@ -17,7 +17,7 @@
         android:layout_marginLeft="@dimen/space_12"
         android:layout_marginRight="@dimen/space_12"
         android:layout_marginTop="@dimen/space_8"
-        android:layout_marginBottom="@dimen/space_8"
+        android:layout_marginBottom="@dimen/space_4"
         android:background="@drawable/bg_gifts_search"
         android:gravity="center_vertical"
         android:orientation="horizontal">

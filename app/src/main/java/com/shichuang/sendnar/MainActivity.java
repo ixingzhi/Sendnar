@@ -14,7 +14,10 @@ import android.view.View;
 
 import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.tool.RxStatusBarTool;
+import com.shichuang.sendnar.common.ShoppingCartCountHelper;
+import com.shichuang.sendnar.event.MessageCountEvent;
 import com.shichuang.sendnar.event.MessageEvent;
+import com.shichuang.sendnar.event.UpdateShoppingCartCount;
 import com.shichuang.sendnar.fragment.NavFragment;
 import com.shichuang.sendnar.interf.OnTabReselectListener;
 import com.shichuang.sendnar.widget.NavigationButton;
@@ -84,6 +87,7 @@ public class MainActivity extends BaseActivity implements NavFragment.OnTabSelec
     @Override
     protected void onResume() {
         super.onResume();
+        ShoppingCartCountHelper.getInstance().getCount(mContext);
     }
 
     @Override
@@ -126,6 +130,16 @@ public class MainActivity extends BaseActivity implements NavFragment.OnTabSelec
             int tab = Integer.parseInt(event.message);
             mNavBar.setCurrentItem(tab);
         } catch (RuntimeException e) {
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(UpdateShoppingCartCount event) {
+        if (null != event) {
+            int count = event.count;
+            if(mNavBar!=null){
+                mNavBar.showUnreadMessageCount(count);
+            }
         }
     }
 

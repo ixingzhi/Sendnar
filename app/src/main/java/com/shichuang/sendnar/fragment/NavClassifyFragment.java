@@ -222,6 +222,9 @@ public class NavClassifyFragment extends Fragment implements View.OnClickListene
                 Bundle bundle = new Bundle();
                 bundle.putInt("typeId", newNavButton.getTypeId());
                 bundle.putInt("priceTypeId", newNavButton.getPriceTypeId());
+                if(getArguments() != null){
+                    bundle.putSerializable("exchangeGift",getArguments().getSerializable("exchangeGift"));
+                }
                 Fragment fragment = Fragment.instantiate(mContext,
                         newNavButton.getClx().getName(), bundle);
                 ft.add(mContainerId, fragment, newNavButton.getTag());

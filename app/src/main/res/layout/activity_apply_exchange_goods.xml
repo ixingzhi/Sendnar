@@ -129,7 +129,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="11dp"
                     android:layout_toEndOf="@+id/tv_delivery_address_title"
-                    android:text="" />
+                    android:text=""
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_phone"
@@ -137,17 +138,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
-                    android:text="" />
+                    android:text=""
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_details_address"
-                    android:layout_alignStart="@+id/tv_consignee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_delivery_address_title"
+                    android:layout_marginLeft="@dimen/sp_12"
                     android:layout_marginRight="@dimen/space_16"
-                    android:layout_marginTop="@dimen/space_8"
+                    android:layout_toEndOf="@+id/tv_delivery_address_title"
                     android:ellipsize="end"
+                    android:gravity="right"
                     android:maxLines="2"
                     android:text="" />
 
@@ -156,7 +158,8 @@
                     android:layout_height="12dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_arrows_right_gray" />
+                    android:src="@drawable/ic_arrows_right_gray"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 

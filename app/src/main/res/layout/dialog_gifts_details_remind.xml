@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_8"
-            android:text="若是一件礼品赠送，您可直接点击微信送礼按钮，按流程进行操作；"
+            android:text="若是赠送一件礼品给好友，您可直接点击【微信送礼】按钮，按流程购买赠送；"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_8"
-            android:text="若是多件物品凑成礼品红包，您可将商品添加至购物车，统一进行结算后直接发出喔~"
+            android:text="也可以多件物品凑成礼品红包，添加至购物车，统一进行结算后直接送礼~"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -48,15 +48,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_35"
             android:text="送给自己："
-            android:textSize="@dimen/text_size_16"
             android:textColor="@color/red"
+            android:textSize="@dimen/text_size_16"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_8"
-            android:text="若您是想为自己购买该商品，可点击【送给自己】，按流程进行操作；"
+            android:text="按流程购买，您可在填写地址之后，收到该商品"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -64,15 +64,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_8"
-            android:text="若是多件物品一起购买，您可将商品添加至购物车，统一进行结算喔~"
+            android:text="若想多件物品一起购买，您可将商品添加至购物车，然后统一购买喔~"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/space_12"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView

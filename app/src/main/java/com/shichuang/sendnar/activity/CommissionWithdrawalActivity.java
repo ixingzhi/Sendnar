@@ -64,12 +64,6 @@ public class CommissionWithdrawalActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-        ((RxTitleBar) findViewById(R.id.title_bar)).setTitleBarClickListener(new RxTitleBar.TitleBarClickListener() {
-            @Override
-            public void onRightClick() {
-                RxActivityTool.skipActivity(mContext, WithdrawalRecordActivity.class);
-            }
-        });
         findViewById(R.id.btn_withdraw).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,8 +76,16 @@ public class CommissionWithdrawalActivity extends BaseActivity {
                 View view = LayoutInflater.from(mContext).inflate(R.layout.layout_tax_calculation, null);
                 TextView mTvTaxRate = view.findViewById(R.id.tv_tax_rate);
                 TextView mTvTaxTateAmount = view.findViewById(R.id.tv_tax_rate_amount);
+                TextView mTvTaxRateExample = view.findViewById(R.id.tv_tax_rate_example);
                 mTvTaxRate.setText(String.format("代扣个人所得税及相关手续费：%s", (rate * 100) + "%"));
-                mTvTaxTateAmount.setText("5000*" + (rate * 100) + "%=" + (5000 * rate) + "元");
+                String amount = "";
+                String amountTotal = "0.00";
+                if (!TextUtils.isEmpty(mEtWithdrawalAmount.getText())) {
+                    amount = RxBigDecimalTool.toDecimal(mEtWithdrawalAmount.getText().toString(), 2);
+                    amountTotal = RxBigDecimalTool.toDecimal(Double.parseDouble(amount) * rate, 2);
+                }
+                mTvTaxRateExample.setText(amount + "元的个税计算");
+                mTvTaxTateAmount.setText(amount + "*" + (rate * 100) + "%=" + amountTotal + "元");
                 PromptDialog mDialog = new PromptDialog(mContext, view);
                 mDialog.show();
             }

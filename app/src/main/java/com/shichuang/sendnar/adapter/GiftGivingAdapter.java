@@ -87,6 +87,7 @@ public class GiftGivingAdapter extends BaseQuickAdapter<LookGiftInfo.LookGiftInf
                 mBtnReceive.setVisibility(View.GONE);
                 break;
         }
+        helper.addOnClickListener(R.id.btn_exchange_gift);
         helper.addOnClickListener(R.id.btn_gather_together_red_packet);
         helper.addOnClickListener(R.id.btn_examples_of);
         helper.addOnClickListener(R.id.btn_receive);

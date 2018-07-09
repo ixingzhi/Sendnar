@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -112,12 +111,36 @@
                     android:padding="@dimen/space_8"
                     android:src="@drawable/ic_gifts_details_share" />
 
-                <ImageView
-                    android:id="@+id/iv_go_to_shopping_cart"
+                <RelativeLayout
                     android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="@dimen/space_8"
-                    android:src="@drawable/ic_gifts_details_shopping_cart" />
+                    android:layout_height="48dp">
+
+                    <ImageView
+                        android:id="@+id/iv_go_to_shopping_cart"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="@dimen/space_8"
+                        android:src="@drawable/ic_gifts_details_shopping_cart" />
+
+
+                    <TextView
+                        android:id="@+id/tv_shopping_cart_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="14dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/space_8"
+                        android:layout_marginTop="@dimen/space_6"
+                        android:background="@drawable/ic_red_dot"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:minWidth="14dp"
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
 
 
             </LinearLayout>
@@ -125,12 +148,13 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/ll_ordinary_purchase"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/white"
             android:gravity="center_vertical"
-            android:padding="@dimen/space_4"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/space_4">
 
             <Space
                 android:layout_width="0dp"
@@ -142,8 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥0.00"
-                android:textColor="@color/black"
-                />
+                android:textColor="@color/black" />
 
             <LinearLayout
                 android:id="@+id/ll_add_to_shopping_cart"
@@ -179,12 +202,35 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_exchange_gift"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/space_4"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_exchange_gift"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/space_12"
+                android:layout_marginRight="@dimen/space_12"
+                android:background="@drawable/ic_gradual_change_orange"
+                android:text="换礼物"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.shichuang.open.widget.RxEmptyLayout
         android:id="@+id/empty_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

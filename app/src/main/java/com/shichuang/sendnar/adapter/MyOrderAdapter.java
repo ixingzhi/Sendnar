@@ -13,6 +13,7 @@ import com.shichuang.open.tool.RxActivityTool;
 import com.shichuang.open.tool.RxBigDecimalTool;
 import com.shichuang.open.tool.RxGlideTool;
 import com.shichuang.sendnar.R;
+import com.shichuang.sendnar.activity.ExchangeGiftOrderDetailsActivity;
 import com.shichuang.sendnar.activity.LogisticsStatusActivity;
 import com.shichuang.sendnar.activity.OrderDetailsActivity;
 import com.shichuang.sendnar.activity.OrderSettlementActivity;
@@ -64,9 +65,15 @@ public class MyOrderAdapter extends BaseMultiItemQuickAdapter<MyOrder, BaseViewH
                 helper.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("id", item.getRows().get(orderBodyPosition).getId());
-                        RxActivityTool.skipActivity(mContext, OrderDetailsActivity.class, bundle);
+                        if (item.getRows().get(orderBodyPosition).getIsExchangeOrder() == 2) {
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("id", item.getRows().get(orderBodyPosition).getId());
+                            RxActivityTool.skipActivity(mContext, ExchangeGiftOrderDetailsActivity.class, bundle);
+                        } else {
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("id", item.getRows().get(orderBodyPosition).getId());
+                            RxActivityTool.skipActivity(mContext, OrderDetailsActivity.class, bundle);
+                        }
                     }
                 });
                 break;
@@ -167,7 +174,7 @@ public class MyOrderAdapter extends BaseMultiItemQuickAdapter<MyOrder, BaseViewH
             public void onClick(View v) {
                 ConfirmDialog mDialog = new ConfirmDialog(mContext);
                 mDialog.setMessage("确认取消订单？");
-                mDialog.setNegativeButton("取消",null);
+                mDialog.setNegativeButton("取消", null);
                 mDialog.setPositiveButton("确定", new ConfirmDialog.DialogInterface() {
                     @Override
                     public void OnClickListener() {
@@ -182,7 +189,7 @@ public class MyOrderAdapter extends BaseMultiItemQuickAdapter<MyOrder, BaseViewH
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("orderNo", orderFootInfo.getOrderNo());
+                bundle.putString("orderId", orderFootInfo.getId() + "");
                 RxActivityTool.skipActivity(mContext, LogisticsStatusActivity.class, bundle);
             }
         });
@@ -192,7 +199,7 @@ public class MyOrderAdapter extends BaseMultiItemQuickAdapter<MyOrder, BaseViewH
             public void onClick(View v) {
                 ConfirmDialog mDialog = new ConfirmDialog(mContext);
                 mDialog.setMessage("确认删除订单？");
-                mDialog.setNegativeButton("取消",null);
+                mDialog.setNegativeButton("取消", null);
                 mDialog.setPositiveButton("确定", new ConfirmDialog.DialogInterface() {
                     @Override
                     public void OnClickListener() {
@@ -208,7 +215,7 @@ public class MyOrderAdapter extends BaseMultiItemQuickAdapter<MyOrder, BaseViewH
             public void onClick(View v) {
                 ConfirmDialog mDialog = new ConfirmDialog(mContext);
                 mDialog.setMessage("确认已收到货物？");
-                mDialog.setNegativeButton("取消",null);
+                mDialog.setNegativeButton("取消", null);
                 mDialog.setPositiveButton("确定", new ConfirmDialog.DialogInterface() {
                     @Override
                     public void OnClickListener() {

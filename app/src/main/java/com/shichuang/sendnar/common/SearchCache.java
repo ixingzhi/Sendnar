@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
+import com.shichuang.sendnar.entify.KeyWord;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class SearchCache {
     private static final String PREFS_NAME = "com.shichuang.sendnar.searchcache";
     private static final String USER_KEY = "search_info_v1";
 
-    public static void update(Context ctx, List<String> searchList) {
+    public static void update(Context ctx, List<KeyWord> searchList) {
         if (searchList != null) {
             String userStr = Convert.toJson(searchList);
             SharedPreferences settings = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -34,13 +35,13 @@ public class SearchCache {
         editor.commit();
     }
 
-    public static List<String> get(Context ctx) {
+    public static List<KeyWord> get(Context ctx) {
         SharedPreferences settings = ctx.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String search = settings.getString(USER_KEY, "");
         if (TextUtils.isEmpty(search)) {
             return new LinkedList<>();
         }
-        return Convert.fromJson(search, new TypeToken<LinkedList<String>>() {
+        return Convert.fromJson(search, new TypeToken<LinkedList<KeyWord>>() {
         }.getType());
     }
 

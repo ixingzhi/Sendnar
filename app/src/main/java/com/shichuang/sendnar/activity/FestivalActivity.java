@@ -16,6 +16,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
 import com.shichuang.open.base.BaseActivity;
+import com.shichuang.open.base.WebPageActivity;
 import com.shichuang.open.tool.RxActivityTool;
 import com.shichuang.open.tool.RxScreenTool;
 import com.shichuang.open.widget.CustomLinearLayoutManager;
@@ -27,10 +28,12 @@ import com.shichuang.sendnar.adapter.GiftsListAdapter;
 import com.shichuang.sendnar.common.Constants;
 import com.shichuang.sendnar.common.GiftsDetailsType;
 import com.shichuang.sendnar.common.NewsCallback;
+import com.shichuang.sendnar.common.SinglePage;
 import com.shichuang.sendnar.common.TokenCache;
 import com.shichuang.sendnar.common.Utils;
 import com.shichuang.sendnar.entify.AMBaseDto;
 import com.shichuang.sendnar.entify.Empty;
+import com.shichuang.sendnar.entify.FestivalBannerActivitiesDetails;
 import com.shichuang.sendnar.entify.FestivalList;
 import com.shichuang.sendnar.entify.GoodsList;
 import com.shichuang.sendnar.entify.FestivalBannerAndGiftBag;
@@ -73,6 +76,8 @@ public class FestivalActivity extends BaseActivity {
     private int festivalId = -1;
     private int actionId = -1;
 
+    private List<FestivalBannerAndGiftBag.PicList> mBannerDataList;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_festival;
@@ -107,7 +112,9 @@ public class FestivalActivity extends BaseActivity {
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-
+                if (mBannerDataList != null && position < mBannerDataList.size()) {
+                    skipActionPage(mBannerDataList.get(position).getId());
+                }
             }
         });
         // 设置比例尺寸 300 * 750
@@ -221,10 +228,10 @@ public class FestivalActivity extends BaseActivity {
                     public void onSuccess(final Response<AMBaseDto<FestivalBannerAndGiftBag>> response) {
                         if (response.body().code == 0 && response.body().data != null) {
                             // Banner图
-                            List<FestivalBannerAndGiftBag.PicList> picList = response.body().data.getPicList();
-                            if (picList != null && picList.size() > 0) {
+                            mBannerDataList = response.body().data.getPicList();
+                            if (mBannerDataList != null && mBannerDataList.size() > 0) {
                                 List<String> bannerList = new ArrayList<>();
-                                for (FestivalBannerAndGiftBag.PicList model : picList) {
+                                for (FestivalBannerAndGiftBag.PicList model : mBannerDataList) {
                                     bannerList.add(Utils.getSingleImageUrlByImageUrls(model.getPic()));
                                 }
                                 mBanner.update(bannerList);
@@ -387,5 +394,41 @@ public class FestivalActivity extends BaseActivity {
                     }
                 });
     }
+
+
+    private void skipActionPage(int actionId) {
+        OkGo.<AMBaseDto<FestivalBannerActivitiesDetails>>get(Constants.actionDetailsUrl)
+                .tag(mContext)
+                .params("token", TokenCache.token(mContext))
+                .params("action_id", actionId)
+                .execute(new NewsCallback<AMBaseDto<FestivalBannerActivitiesDetails>>() {
+                    @Override
+                    public void onStart(Request<AMBaseDto<FestivalBannerActivitiesDetails>, ? extends Request> request) {
+                        super.onStart(request);
+                        showLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(final Response<AMBaseDto<FestivalBannerActivitiesDetails>> response) {
+                        dismissLoading();
+                        if (response.body().code == 0 && response.body().data != null) {
+                            FestivalBannerActivitiesDetails.ActionDetail actionDetail = response.body().data.getActionDetail();
+                            WebPageActivity.newInstance(mContext, "关于送哪儿", Constants.MAIN_ENGINE_PIC + actionDetail.getH5Url());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<AMBaseDto<FestivalBannerActivitiesDetails>> response) {
+                        super.onError(response);
+                        dismissLoading();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                    }
+                });
+    }
+
 
 }

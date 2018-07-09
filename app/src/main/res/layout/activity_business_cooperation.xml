@@ -98,7 +98,7 @@
         android:layout_height="150dp"
         android:background="@color/white"
         android:gravity="top"
-        android:hint="请输入想法"
+        android:hint="简单描述下您为什么想和我们合作呢？"
         android:textSize="@dimen/text_size_15"
         android:padding="@dimen/space_12" />
 

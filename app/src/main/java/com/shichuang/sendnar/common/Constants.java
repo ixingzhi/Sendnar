@@ -182,4 +182,24 @@ public interface Constants {
     String myItemsToSendMeConfirmOrderUrl = MAIN_ENGINE + "/api/v1/gift/gift_pack_receive_page";
     // 我的物品，提交订单
     String myItemsToSendMeCommitOrderUrl = MAIN_ENGINE + "/api/v1/gift/gift_pack_receive";
+    // 热门搜索
+    String hotWordUrl = MAIN_ENGINE + "/api/v1/goods/hot_word_list";
+    // 获取购物车数量
+    String getShoppingCartCountUrl = MAIN_ENGINE + "/api/v2/goods/getSongnaerShoppingCartCount";
+    // 消息中心
+    String messageCenterUrl = MAIN_ENGINE + "/api/v1/user/messageCenter";
+    // 活动Banner详情
+    String actionDetailsUrl = MAIN_ENGINE + "/api/v1/action_info/get_actionAndGoods_detail_list";
+    // 获取收获地址
+    String getOrderReceiveAddressUrl = MAIN_ENGINE + "/api/v1/goods_refund_transform/getReceiveAddress";
+    // 买家确认收货
+    String buyersConfirmGoodsUrl = MAIN_ENGINE + "/api/v1/goods_refund_transform/confirm_receipt";
+    // 消息未读数量
+    String messageCountUrl = MAIN_ENGINE + "/api/v1/message/message_num";
+    // 阅读消息
+    String readMessageUrl = MAIN_ENGINE + "/api/v1/message/readMessage";
+    // 换礼物确认订单
+    String exchangeGiftConfirmOrderUrl = MAIN_ENGINE + "/api/v1/gift/Exchange_gift";
+    // 换礼物提交订单
+    String exchangeGiftSubmitOrderUrl = MAIN_ENGINE + "/api/v1/gift/create_Exchange_gift";
 }

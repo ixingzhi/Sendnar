@@ -26,13 +26,17 @@ import com.shichuang.sendnar.Setting;
 import com.shichuang.sendnar.common.BuyType;
 import com.shichuang.sendnar.common.Constants;
 import com.shichuang.sendnar.common.NewsCallback;
+import com.shichuang.sendnar.common.ShoppingCartCountHelper;
 import com.shichuang.sendnar.common.TokenCache;
 import com.shichuang.sendnar.common.UserCache;
 import com.shichuang.sendnar.common.Utils;
 import com.shichuang.sendnar.entify.AMBaseDto;
 import com.shichuang.sendnar.entify.Empty;
+import com.shichuang.sendnar.entify.ExchangeGift;
 import com.shichuang.sendnar.entify.GiftsDetails;
 import com.shichuang.sendnar.entify.User;
+import com.shichuang.sendnar.event.MessageEvent;
+import com.shichuang.sendnar.event.UpdateShoppingCartCount;
 import com.shichuang.sendnar.tool.BannerImageLoader;
 import com.shichuang.sendnar.widget.DirectPurchaseDialog;
 import com.shichuang.sendnar.widget.GiftsDetailsRemindDialog;
@@ -47,6 +51,10 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +66,7 @@ import java.util.List;
 public class GiftsDetailsActivity extends BaseActivity implements View.OnClickListener {
     private RxEmptyLayout mEmptyLayout;
     private LinearLayout mLlTitleBar;
+    private TextView mTvShoppingCartCount;
     private Banner mBanner;
     private TextView mTvGiftsName;
     private TextView mTvGiftsPrice;
@@ -70,6 +79,8 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
     private int operationType;
     // 是否隐藏购物车，显示商品价格(分类中节日和扶贫需要影藏加入购物车，显示价格)
     private boolean isHideAddShoppingCart;
+    // 是否换礼物
+    private ExchangeGift exchangeGift;
     private GiftsDetails giftsDetails;
     private DirectPurchaseDialog mBuyDialog;
 
@@ -84,10 +95,12 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
         id = getIntent().getIntExtra("id", 0);
         operationType = getIntent().getIntExtra("operationType", 0);
         isHideAddShoppingCart = getIntent().getBooleanExtra("isHideAddShoppingCart", false);
+        exchangeGift = (ExchangeGift) getIntent().getSerializableExtra("exchangeGift");
         mLlTitleBar = (LinearLayout) findViewById(R.id.ll_title_bar);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mLlTitleBar.getLayoutParams();
         params.setMargins(0, RxStatusBarTool.getStatusBarHeight(mContext), 0, 0);
 
+        mTvShoppingCartCount = (TextView) findViewById(R.id.tv_shopping_cart_count);
         initBanner();
         mTvGiftsName = (TextView) findViewById(R.id.tv_gifts_name);
         mTvGiftsPrice = (TextView) findViewById(R.id.tv_gifts_price);
@@ -104,13 +117,23 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
-        if(isHideAddShoppingCart){
+        if (isHideAddShoppingCart) {
             mLlAddToShoppingCart.setVisibility(View.INVISIBLE);
             mTvGiftsPrice01.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             mLlAddToShoppingCart.setVisibility(View.VISIBLE);
             mTvGiftsPrice01.setVisibility(View.GONE);
         }
+
+        if (exchangeGift != null) {
+            findViewById(R.id.ll_ordinary_purchase).setVisibility(View.GONE);
+            findViewById(R.id.ll_exchange_gift).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.ll_ordinary_purchase).setVisibility(View.VISIBLE);
+            findViewById(R.id.ll_exchange_gift).setVisibility(View.GONE);
+        }
+
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -156,11 +179,13 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
         mLlAddToShoppingCart.setOnClickListener(this);
         findViewById(R.id.btn_wechat_gift_giving).setOnClickListener(this);
         findViewById(R.id.btn_direct_purchase).setOnClickListener(this);
+        findViewById(R.id.btn_exchange_gift).setOnClickListener(this);
     }
 
     @Override
     public void initData() {
         getGiftsDetailsData();
+        ShoppingCartCountHelper.getInstance().getCount(mContext);
     }
 
     @Override
@@ -200,6 +225,16 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
             case R.id.btn_direct_purchase:
                 if (Utils.isLogin(mContext)) {
                     showDirectPurchaseDialog();
+                }
+                break;
+            // 换礼物
+            case R.id.btn_exchange_gift:
+                if (Utils.isLogin(mContext)) {
+                    exchangeGift.setGoodIdNew(giftsDetails.getGoodsId());
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putSerializable("exchangeGift", exchangeGift);
+                    bundle2.putInt("buyType", BuyType.EXCHANGE_GIFT);
+                    RxActivityTool.skipActivity(mContext, ExchangeGiftConfirmOrderActivity.class, bundle2);
                 }
                 break;
             default:
@@ -308,6 +343,7 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
                     public void onSuccess(final Response<AMBaseDto<Empty>> response) {
                         showToast(response.body().msg);
                         if (response.body().code == 0) {
+                            ShoppingCartCountHelper.getInstance().getCount(mContext);
                         }
                     }
 
@@ -334,7 +370,7 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
      * 分享
      */
     private void share() {
-        String url = Constants.MAIN_ENGINE_PIC + "/songnaerWechat/#/item?id=" + id + "&type=" + operationType + "&from=share"+"&user="+ TokenCache.userId(mContext);
+        String url = Constants.MAIN_ENGINE_PIC + "/songnaerWechat/#/item?id=" + id + "&type=" + operationType + "&from=share" + "&user=" + TokenCache.userId(mContext);
         String title = "";
         User user = UserCache.user(mContext);
         if (user == null) {
@@ -372,6 +408,23 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
         mDialog.show();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(UpdateShoppingCartCount event) {
+        if (null != event) {
+            int count = event.count;
+            if (count > 0) {
+                if (count > 99) {
+                    mTvShoppingCartCount.setText("99+");
+                } else {
+                    mTvShoppingCartCount.setText(String.valueOf(count));
+                }
+                mTvShoppingCartCount.setVisibility(View.VISIBLE);
+            } else {
+                mTvShoppingCartCount.setVisibility(View.GONE);
+            }
+        }
+    }
+
     @Override
     protected void onDestroy() {
         if (mBuyDialog != null) {
@@ -390,6 +443,7 @@ public class GiftsDetailsActivity extends BaseActivity implements View.OnClickLi
                 e.printStackTrace();
             }
         }
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

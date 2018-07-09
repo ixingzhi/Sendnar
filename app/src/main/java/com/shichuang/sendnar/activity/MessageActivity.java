@@ -16,10 +16,17 @@ import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.widget.RxEmptyLayout;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.adapter.MessageAdapter;
+import com.shichuang.sendnar.common.Constants;
+import com.shichuang.sendnar.common.MessageCountHelper;
 import com.shichuang.sendnar.common.NewsCallback;
 import com.shichuang.sendnar.common.TokenCache;
 import com.shichuang.sendnar.entify.AMBaseDto;
+import com.shichuang.sendnar.entify.Empty;
+import com.shichuang.sendnar.entify.MessageCount;
 import com.shichuang.sendnar.entify.MessageList;
+import com.shichuang.sendnar.event.MessageCountEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -32,9 +39,6 @@ public class MessageActivity extends BaseActivity {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private MessageAdapter mAdapter;
     private RxEmptyLayout mEmptyLayout;
-
-    private int pageSize = 10;
-    private int pageIndex = 1;
 
     @Override
     public int getLayoutId() {
@@ -73,18 +77,15 @@ public class MessageActivity extends BaseActivity {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                rotateAnim(mAdapter.getViewByPosition(position, R.id.iv_open_status), 180f);
-                boolean openStatus = !mAdapter.getData().get(position).isOpenMessageContent();
-                mAdapter.getData().get(position).setOpenMessageContent(openStatus);
+                rotateAnim(mAdapter.getViewByPosition(mRecyclerView, position, R.id.iv_open_status), 180f);
+                boolean openStatus = !mAdapter.getItem(position).isOpenMessageContent();
+                mAdapter.getItem(position).setOpenMessageContent(openStatus);
                 mAdapter.notifyItemChanged(position);
+
+                // 阅读消息
+                readMessage(mAdapter.getItem(position).getId());
             }
         });
-        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                loadMore();
-            }
-        }, mRecyclerView);
     }
 
     @Override
@@ -93,65 +94,31 @@ public class MessageActivity extends BaseActivity {
     }
 
     private void refresh() {
-//        pageIndex = 1;
-//        mSwipeRefreshLayout.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                mSwipeRefreshLayout.setRefreshing(true);
-//                getMessageListData();
-//            }
-//        });
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mAdapter.addData(new MessageList.MessageListModel());
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
-
-    private void loadMore() {
-        //getMessageListData();
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                getMessageListData();
+            }
+        });
     }
 
     private void getMessageListData() {
-        OkGo.<AMBaseDto<MessageList>>get("")
+        OkGo.<AMBaseDto<List<MessageList>>>get(Constants.messageCenterUrl)
                 .tag(mContext)
                 .params("token", TokenCache.token(mContext))
-                .params("pageSize", pageSize)
-                .params("pageIndex", pageIndex)
-                .execute(new NewsCallback<AMBaseDto<MessageList>>() {
+                .execute(new NewsCallback<AMBaseDto<List<MessageList>>>() {
                     @Override
-                    public void onStart(Request<AMBaseDto<MessageList>, ? extends Request> request) {
+                    public void onStart(Request<AMBaseDto<List<MessageList>>, ? extends Request> request) {
                         super.onStart(request);
                     }
 
                     @Override
-                    public void onSuccess(final Response<AMBaseDto<MessageList>> response) {
+                    public void onSuccess(final Response<AMBaseDto<List<MessageList>>> response) {
                         if (response.body().code == 0) {
-                            MessageList table = response.body().data;
-                            setData(table.getRows());
-                            // 判断是否有更多数据
-                            if (table.getRecordCount() > 0) {
-                                mEmptyLayout.hide();
-                                if (mAdapter.getData().size() < table.getRecordCount()) {
-                                    pageIndex++;
-                                    mAdapter.loadMoreComplete();
-                                    mAdapter.setEnableLoadMore(true);
-                                } else {
-                                    if (table.getRecordCount() < pageSize) {
-                                        mAdapter.loadMoreEnd(true);
-                                        //showToast("没有更多数据");
-                                    } else {
-                                        mAdapter.loadMoreEnd(false);
-                                        //mAdapter.setEnableLoadMore(false);
-                                    }
-                                }
+                            List<MessageList> list = response.body().data;
+                            if (list != null && list.size() > 0) {
+                                setData(list);
                             } else {
                                 mEmptyLayout.show(RxEmptyLayout.EMPTY_DATA);
                             }
@@ -161,7 +128,7 @@ public class MessageActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onError(Response<AMBaseDto<MessageList>> response) {
+                    public void onError(Response<AMBaseDto<List<MessageList>>> response) {
                         super.onError(response);
                         mEmptyLayout.show(RxEmptyLayout.NETWORK_ERROR);
                     }
@@ -174,7 +141,7 @@ public class MessageActivity extends BaseActivity {
                 });
     }
 
-    private void setData(List<MessageList.MessageListModel> data) {
+    private void setData(List<MessageList> data) {
         if (mSwipeRefreshLayout.isRefreshing()) {
             mAdapter.setNewData(data);
         } else {
@@ -188,5 +155,35 @@ public class MessageActivity extends BaseActivity {
         anim.setDuration(400); // 设置动画时间
         //anim.setInterpolator(new AccelerateInterpolator()); // 设置插入器
         view.startAnimation(anim);
+    }
+
+    private void readMessage(int id) {
+        OkGo.<AMBaseDto<Empty>>get(Constants.readMessageUrl)
+                .tag(mContext)
+                .params("token", TokenCache.token(mContext))
+                .params("message_id", id)
+                .execute(new NewsCallback<AMBaseDto<Empty>>() {
+                    @Override
+                    public void onStart(Request<AMBaseDto<Empty>, ? extends Request> request) {
+                        super.onStart(request);
+                    }
+
+                    @Override
+                    public void onSuccess(final Response<AMBaseDto<Empty>> response) {
+                        if (response.body().code == 0) {
+                            MessageCountHelper.getInstance().getCount(mContext);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<AMBaseDto<Empty>> response) {
+                        super.onError(response);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                    }
+                });
     }
 }

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="发红包（红包数量为多个）"
+            android:text="发红包"
             android:textColor="@color/red"
             android:textSize="@dimen/text_size_16"
             android:textStyle="bold" />
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_8"
-            android:text="若您是以【发红包】的形式送出；红包中礼品至少为2件，红包个数为相应的礼品个数，每人限领1件；"
+            android:text="在【我的物品】中，勾选需要组合的礼品即可组合成红包，分享到您的微信群或朋友圈；以【发红包】的形式送出，红包礼品每人限领一件；"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_35"
-            android:text="分享微信好友（红包数量为1个）"
+            android:text="分享微信好友"
             android:textColor="@color/red"
             android:textSize="@dimen/text_size_16"
             android:textStyle="bold" />
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_8"
-            android:text="若您是以【分享微信好友】的形式送出，则红包个数仅为1个，无论礼品个数是多少，抢到红包的人获得红包中所有的礼品。"
+            android:text="若您是以【分享微信好友】的形式送出，可将一个或多个礼品分享给单个微信好友或朋友圈"
             android:textColor="@color/white"
             android:textStyle="bold" />
 

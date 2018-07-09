@@ -1,20 +1,36 @@
 package com.shichuang.sendnar.activity.view;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.Request;
+import com.shichuang.open.base.BaseActivity;
 import com.shichuang.open.tool.RxActivityTool;
 import com.shichuang.open.tool.RxTimeTool;
+import com.shichuang.open.tool.RxToastTool;
 import com.shichuang.sendnar.R;
 import com.shichuang.sendnar.activity.GoodsAfterAuditActivity;
 import com.shichuang.sendnar.activity.LogisticsStatusActivity;
+import com.shichuang.sendnar.common.Constants;
+import com.shichuang.sendnar.common.NewsCallback;
+import com.shichuang.sendnar.common.TokenCache;
+import com.shichuang.sendnar.entify.AMBaseDto;
+import com.shichuang.sendnar.entify.Empty;
 import com.shichuang.sendnar.entify.RefundInfo;
+import com.shichuang.sendnar.event.UpdateOrderEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 审核结果
@@ -22,6 +38,7 @@ import com.shichuang.sendnar.entify.RefundInfo;
  */
 
 public class AuditTheResult {
+    private Context mContext;
     private View view;
     private TextView mTvApplyType;
     private TextView mTvApplyTime;
@@ -45,6 +62,7 @@ public class AuditTheResult {
     private LinearLayout mLlPlatformDeliveryInfo;
     private TextView mTvPlatformLogisticsOrder;
     private TextView mTvPlatformLogisticsCompany;
+    private Button mBtnBuyersConfirmGoods;
     // 买家收货
     private TextView mTvBuyerTimeOfReceipt;
     private LinearLayout mLlBuyerTimeOfReceipt;
@@ -52,8 +70,11 @@ public class AuditTheResult {
     private TextView mTvExchangeGoodsSuccess;
 
     private RefundInfo data;
+    private int orderDetailId;
+
 
     public AuditTheResult(final GoodsAfterAuditActivity activity) {
+        mContext = activity;
         view = LayoutInflater.from(activity).inflate(R.layout.layout_audit_the_result, (ViewGroup) activity.findViewById(R.id.content), false);
         // 默认影藏
         view.setVisibility(View.GONE);
@@ -79,6 +100,7 @@ public class AuditTheResult {
         mLlPlatformDeliveryInfo = view.findViewById(R.id.ll_platform_delivery_info);
         mTvPlatformLogisticsOrder = view.findViewById(R.id.tv_platform_logistics_order);
         mTvPlatformLogisticsCompany = view.findViewById(R.id.tv_platform_logistics_company);
+        mBtnBuyersConfirmGoods = view.findViewById(R.id.btn_buyers_confirm_goods);
 
         mTvBuyerTimeOfReceipt = view.findViewById(R.id.tv_buyer_time_of_receipt);
         mLlBuyerTimeOfReceipt = view.findViewById(R.id.ll_buyer_time_of_receipt);
@@ -86,7 +108,7 @@ public class AuditTheResult {
         mTvExchangeGoodsSuccess = view.findViewById(R.id.tv_exchange_goods_success);
 
         // 买家发货物流查询
-        mTvBuyersDeliveryTime.setOnClickListener(new View.OnClickListener() {
+        mLlBuyersDeliveryInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -96,13 +118,20 @@ public class AuditTheResult {
             }
         });
         // 平台发货物流查询
-        mTvBuyersDeliveryTime.setOnClickListener(new View.OnClickListener() {
+        mLlPlatformDeliveryInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("logisticsNo", data.getPlatformExpressNo());
                 bundle.putString("logisticsCompany", data.getPlatformCom());
                 RxActivityTool.skipActivity(activity, LogisticsStatusActivity.class, bundle);
+            }
+        });
+        // 买家确认收货
+        mBtnBuyersConfirmGoods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buyersConfirmGoods();
             }
         });
     }
@@ -214,7 +243,6 @@ public class AuditTheResult {
                 mLlPlatformTakeGoods.setVisibility(View.VISIBLE);
                 mLlPlatformDeliveryInfo.setVisibility(View.VISIBLE);
                 mLlBuyerTimeOfReceipt.setVisibility(View.VISIBLE);
-
                 break;
 
             default:
@@ -227,6 +255,49 @@ public class AuditTheResult {
         }
 
     }
+
+    public void setOrderDetailId(int id) {
+        this.orderDetailId = id;
+    }
+
+    /**
+     * 买家确认收货
+     */
+
+    private void buyersConfirmGoods() {
+        OkGo.<AMBaseDto<Empty>>get(Constants.buyersConfirmGoodsUrl)
+                .tag(mContext)
+                .params("token", TokenCache.token(mContext))
+                .params("order_detail_id", orderDetailId)
+                .execute(new NewsCallback<AMBaseDto<Empty>>() {
+                    @Override
+                    public void onStart(Request<AMBaseDto<Empty>, ? extends Request> request) {
+                        super.onStart(request);
+                        ((BaseActivity) mContext).showLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(Response<AMBaseDto<Empty>> response) {
+                        ((BaseActivity) mContext).dismissLoading();
+                        RxToastTool.showShort(response.body().msg);
+                        if (response.body().code == 0) {
+                            ((BaseActivity) mContext).finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<AMBaseDto<Empty>> response) {
+                        super.onError(response);
+                        ((BaseActivity) mContext).dismissLoading();
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                    }
+                });
+    }
+
 
     public void onDestroy() {
         view = null;
